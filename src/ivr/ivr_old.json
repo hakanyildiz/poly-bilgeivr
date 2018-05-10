@@ -1,0 +1,233 @@
+{
+    "modulename":"Postpaid Ana Menü",
+    "totalcall":"58.000",
+    "totalagent":"28.000",
+    "totalhangup":"28.000",
+    "totaldisconnect":"2000",
+    "details":[
+       {
+          "modulename":"Fatura Ana Menü",
+          "totalperc":"15.4%",
+          "agentperc":"23.7%",
+          "hangupperc":"7.4%",
+          "disconnectperc":"10.9%",
+          "dtmf":"1",
+          "details":[
+             {
+                "modulename":"Fatura Ödeme",
+                "totalperc":"7%",
+                "agentperc":"1%",
+                "hangupperc":"26.83%",
+                "dtmf":"1",
+                "details":[
+                   {
+                      "detailname":"Faturası Olmayanlar",
+                      "totalperc":"16.5%",
+                      "agentperc":"30%",
+                      "hangupperc":"3%",
+                      "dtmf":"D",
+                      "details":[
+ 
+                      ]
+                   },
+                   {
+                      "detailname":"Faturası Olanlar",
+                      "totalperc":"83.5%",
+                      "agentperc":"70%",
+                      "hangupperc":"97%",
+                      "dtmf":"",
+                      "details":[
+                         {
+                            "detailname":"İşlem Yapanlar",
+                            "totalperc":"32%",
+                            "agentperc":"",
+                            "hangupperc":"",
+                            "dtmf":"",
+                            "details":[
+ 
+                            ]
+                         },
+                         {
+                            "detailname":"İşlem Yapmayanlar",
+                            "totalperc":"64%",
+                            "agentperc":"",
+                            "hangupperc":"",
+                            "dtmf":"",
+                            "details":[
+ 
+                            ]
+                         },
+                         {
+                            "detailname":"Diğer",
+                            "totalperc":"4%",
+                            "agentperc":"",
+                            "hangupperc":"",
+                            "dtmf":"",
+                            "details":[
+ 
+                            ]
+                         }
+                      ]
+                   }
+                ]
+             },
+             {
+                "modulename":"Fatura Detaylar",
+                "totalperc":"20.4%",
+                "agentperc":"12.7%",
+                "hangupperc":"47.3%",
+                "dtmf":"2",
+                "details":[
+                   {
+                      "detailname":"Faturası Olmayanlar",
+                      "totalperc":"33.5%",
+                      "agentperc":"37%",
+                      "hangupperc":"30%",
+                      "dtmf":"",
+                      "details":[
+ 
+                      ]
+                   },
+                   {
+                      "detailname":"Faturası Olanlar",
+                      "totalperc":"66.5%",
+                      "agentperc":"63%",
+                      "hangupperc":"70%",
+                      "dtmf":"",
+                      "details":[
+                         {
+                            "detailname":"Fatura Ödemeye Gidenler",
+                            "totalperc":"2%",
+                            "agentperc":"",
+                            "hangupperc":"",
+                            "dtmf":"1",
+                            "details":[
+ 
+                            ]
+                         },
+                         {
+                            "detailname":"SMS ile Detay İsteyenler",
+                            "totalperc":"8%",
+                            "agentperc":"",
+                            "hangupperc":"",
+                            "dtmf":"2",
+                            "details":[
+ 
+                            ]
+                         },
+                         {
+                            "detailname":"Diğer(Ana Menü, Hangup, vb.)",
+                            "totalperc":"90%",
+                            "agentperc":"",
+                            "hangupperc":"",
+                            "dtmf":"",
+                            "details":[
+ 
+                            ]
+                         }
+                      ]
+                   }
+                ]
+             },
+             {
+                "modulename":"Güncel Fatura",
+                "totalperc":"12.5%",
+                "agentperc":"12.7%",
+                "hangupperc":"13.5%",
+                "dtmf":"3",
+                "details":[
+ 
+                ]
+             },
+             {
+                "modulename":"E-Fatura Servisleri",
+                "totalperc":"3.2%",
+                "agentperc":"1.7%",
+                "hangupperc":"8.1%",
+                "dtmf":"4",
+                "details":[
+                   {
+                      "detailname":"E-Fatura Aktivasyon",
+                      "totalperc":"37.5%",
+                      "agentperc":"25%",
+                      "hangupperc":"50%",
+                      "dtmf":"1",
+                      "details":[
+ 
+                      ]
+                   },
+                   {
+                      "detailname":"Otomatik Ödeme Talimatı",
+                      "totalperc":"20%",
+                      "agentperc":"20%",
+                      "hangupperc":"20%",
+                      "dtmf":"2",
+                      "details":[
+ 
+                      ]
+                   },
+                   {
+                      "detailname":"Fatura Üst Limit",
+                      "totalperc":"8.5%",
+                      "agentperc":"7%",
+                      "hangupperc":"10%",
+                      "dtmf":"3",
+                      "details":[
+ 
+                      ]
+                   }
+                ]
+             },
+             {
+                "modulename":"Numara Değişikliği",
+                "totalperc":"0.8%",
+                "agentperc":"1.05%",
+                "hangupperc":"0%",
+                "dtmf":"5",
+                "details":[
+                   {
+                      "detailname":"Numara Değişikliği Bilgi Alma",
+                      "totalperc":"95%",
+                      "agentperc":"",
+                      "hangupperc":"",
+                      "dtmf":"1",
+                      "details":[
+ 
+                      ]
+                   },
+                   {
+                      "detailname":"Numara Değişiklik İşlemi",
+                      "totalperc":"5%",
+                      "agentperc":"",
+                      "hangupperc":"",
+                      "dtmf":"2",
+                      "details":[
+ 
+                      ]
+                   }
+                ]
+             },
+             {
+                "modulename":"Geçmiş Çağrı Detaylarını E-Mail İle alma",
+                "totalperc":"5%",
+                "agentperc":"3.45%",
+                "hangupperc":"10.2%",
+                "dtmf":"6",
+                "details":[
+ 
+                ]
+             },
+             {
+                "modulename":"MT Transfer",
+                "totalperc":"31.4%",
+                "agentperc":"62.7%",
+                "hangupperc":"0%",
+                "dtmf":"0",
+                "details":[
+ 
+                ]
+             }
+          ]
+       }
+    ]
+ }

@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="blg-drawer-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      :host(.iron-selected) paper-icon-item {
+        color: var(--oredata-black);
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      a {
+        display: block;
+        /* padding: 0 16px; */
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+        font-size: 18px;
+      }
+
+      a.iron-selected {
+        color: var(--app-theme-color);
+        font-weight: bold;
+      }
+    </style>
+    <a name="[[name]]" href="[[href]]">
+      <paper-icon-item>
+        <iron-icon icon="[[icon]]" slot="item-icon"></iron-icon>
+        [[title]]
+      </paper-icon-item>
+    </a>
+  </template>
+  <script>
+    class BlgDrawerItem extends Polymer.Element {
+      static get is() {
+        return 'blg-drawer-item';
+      }
+      static get properties() {
+        return {
+          name: String,
+          href: String,
+          icon: String,
+          title: String
+        };
+      }
+    }
+    window.customElements.define(BlgDrawerItem.is, BlgDrawerItem);
+  </script>
+</dom-module>

@@ -1,0 +1,129 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+
+<dom-module id="blg-copyright">
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                width: calc(100% - var(--app-drawer-width));
+            }
+
+            #sitecopyright {
+                background: var(--oredata-black);
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                color: white;
+                padding: 0px 20px;
+            }
+
+            #sitecopyright .company {
+                @apply --layout-flex;
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                margin-bottom: -10px;
+            }
+
+            #sitecopyright .sub {
+                @apply --layout-flex;
+                text-align: right;
+                color: var(--oredata-color);
+            }
+
+            #sitecopyright a {
+                color: var(--oredata-color);
+                text-decoration: none;
+                font-weight: 800;
+            }
+
+            #sitecopyright .logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            #sitecopyright .logo iron-image {
+                width: 100%;
+                height: 100%;
+            }
+
+            #sitecopyright .logo span {
+                margin-left: -20px;
+                color: var(--oredata-color);
+                font-weight: 500;
+                font-size: 18px;
+            }
+        </style>
+
+        <div id="sitecopyright">
+            <a class="company" href="http://www.oredata.com" target="_blank">
+                <div class="logo">
+                    <iron-image src="./images/oredata-small.png" preload sizing="cover"></iron-image>
+                </div>
+                <span>
+                    Developed by OREDATA
+                </span>
+            </a>
+            <span class="sub">© Copyright [[_getCurrentYear()]]
+                <a href="/" target="_blank">Bilge A.I.</a>
+                - All rights reserved
+            </span>
+        </div>
+
+    </template>
+
+    <script>
+        /**
+         * `blg-copyright` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class BlgCopyRight extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'blg-copyright';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {
+
+                });
+            }
+
+            _getCurrentYear() {
+                return new Date().getFullYear();
+            }
+        }
+
+        window.customElements.define(BlgCopyRight.is, BlgCopyRight);
+    </script>
+</dom-module>

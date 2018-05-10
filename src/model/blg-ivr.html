@@ -1,0 +1,527 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="blg-ivr">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                color: #000;
+                background: #eee;
+            }
+
+            #app {
+                min-height: 100vh;
+                /* border-top: 1px solid #e0e0e0; */
+                /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+            }
+
+            .horizontal-flex {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .vertical-flex {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .aling-center {
+                align-items: center;
+            }
+
+            .justify-center {
+                justify-content: center;
+            }
+
+            .ul-title {
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                font-size: 20px;
+                align-items: center;
+            }
+
+            li {
+                list-style-type: none;
+            }
+
+            .closed .vertical {
+                transition: all 0.5s ease-in-out;
+                transform: rotate(-90deg);
+            }
+
+            .closed .horizontal {
+                transition: all 0.5s ease-in-out;
+                transform: rotate(-90deg);
+                opacity: 1;
+            }
+
+            .opened {
+                opacity: 1;
+            }
+
+            .opened .vertical {
+                transition: all 0.5s ease-in-out;
+                transform: rotate(90deg);
+            }
+
+            .opened .horizontal {
+                transition: all 0.5s ease-in-out;
+                transform: rotate(90deg);
+                opacity: 0;
+            }
+
+            .circle-plus {
+                visibility: hidden;
+                display: none;
+                height: 3em;
+                width: 3em;
+                font-size: 0.5em;
+                opacity: 0.7;
+                padding: 0px 10px;
+            }
+
+            .circle-plus .circle {
+                position: relative;
+                width: 2.55em;
+                height: 2.5em;
+                border-radius: 100%;
+                border: solid 0.5em #dfdad7;
+            }
+
+            .circle-plus .circle .horizontal {
+                position: absolute;
+                background-color: #222;
+                width: 30px;
+                height: 5px;
+                left: 50%;
+                margin-left: -15px;
+                top: 50%;
+                margin-top: -2.5px;
+            }
+
+            .invisible {
+                visibility: hidden;
+            }
+
+            .circle-plus .circle .vertical {
+                position: absolute;
+                background-color: #222;
+                width: 5px;
+                height: 30px;
+                left: 50%;
+                margin-left: -2.5px;
+                top: 50%;
+                margin-top: -15px;
+            }
+
+            .module-item {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                padding: 5px 10px;
+                /* border-top: 1px solid #555; */
+                @apply --shadow-elevation-2dp;
+                @apply --shadow-transition;
+                border-bottom: 1px solid #777;
+            }
+
+            .module-item:hover {
+                @apply --shadow-elevation-3dp;
+
+            }
+
+            .module-item .circle-plus,
+            .module-item h3,
+            .module-item ol {
+                pointer-events: none;
+                padding-left: 0;
+            }
+
+            ul {
+                /* border-top: 1px solid #e0e0e0; */
+                transition: opacity 0.3s ease-out;
+                opacity: 0;
+                height: 0;
+                overflow: hidden;
+                margin: 0;
+            }
+
+            ul.active {
+                opacity: 1;
+                height: auto;
+            }
+
+            .module-item ol li {
+                font-size: .8em;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                min-width: 150px;
+            }
+
+            .moduleopened {
+                background: #e0e0e0;
+            }
+
+
+            .module-item .paper-fab {
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                border-radius: 50%;
+                box-sizing: border-box;
+                color: #fff;
+                background: #555;
+                background: var(--oredata-color);
+                cursor: pointer;
+                height: 40px;
+                min-width: 0;
+                outline: none;
+                padding: 14px;
+                position: relative;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                -webkit-user-select: none;
+                user-select: none;
+                width: 40px;
+                z-index: 0;
+                transition: cubic-bezier(0.86, 0, 0.07, 1);
+            }
+
+            .module-item .paper-fab.opened {
+                background: #222;
+                background: var(--oredata-black);
+            }
+
+            .module-item .paper-fab span {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+            }
+
+            .module-item h3 {
+                margin: 0;
+                padding: 0px 7px;
+                font-size: 1em;
+                width: 160px;
+            }
+
+            li.total-perc {
+                font-weight: 500;
+                font-size: 1em !important;
+                text-align: justify;
+                font-style: italic;
+            }
+        </style>
+        <div id="app" class="horizontal-flex">
+        </div>
+
+    </template>
+    <script>
+        /**
+         * `blg-ivr` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class BlgIvr extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'blg-ivr';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {
+
+                    this._init();
+
+                });
+            }
+
+
+            _init() {
+                var $app = this.$.app;
+                const that = this;
+                let json = {};
+
+                fetch("./src/ivr/ivr.json").then(function (response) {
+                    return response.json();
+                }).then(function (myJson) {
+                    var tree = [myJson];
+
+                    var res = that.recursive_tree(tree, 'div', 'ul');
+
+                    $app.appendChild(res);
+                });
+            }
+
+            recursive_tree(data, tag, child_wrapper, level) {
+                var that = this;
+                var html = [];
+                var result = document.createElement("div");
+
+                level = level || 0;
+
+                child_wrapper = (child_wrapper != false) ? child_wrapper : 'ul';
+
+                data.forEach((obj, i) => {
+
+                    var containerElement = document.createElement(tag);
+
+                    // var containerElement = document.createElement("div");
+                    containerElement.classList.add('module-item');
+                    containerElement.addEventListener("click", this.visor, false);
+
+                    //dtmf
+                    if (obj.hasOwnProperty('dtmf')) {
+
+                        if (obj.dtmf.length > 0) {
+                            var element = document.createElement("div");
+                            element.classList.add('paper-fab');
+                            var spanElement = document.createElement("span");
+                            textNode = document.createTextNode(obj.dtmf);
+                            spanElement.appendChild(textNode);
+                            element.appendChild(spanElement);
+                            containerElement.appendChild(element);
+                        } else {
+                            var element = document.createElement("div");
+                            element.classList.add('paper-fab');
+                            element.classList.add('invisible');
+                            containerElement.appendChild(element);
+                        }
+                    }
+
+
+                    //Firstly, we should check if it includes 'modulename' or 'detailname' property
+                    var textNode = "";
+                    var titleElement = document.createElement("h3");
+                    if (obj.hasOwnProperty('modulename')) {
+                        //modulename
+                        textNode = document.createTextNode(obj.modulename);
+                    }
+
+                    if (obj.hasOwnProperty('detailname')) {
+                        //detailname
+                        textNode = document.createTextNode(obj.detailname);
+                    }
+
+                    titleElement.appendChild(textNode);
+
+                    //other details wrapper 
+                    var ulElement = document.createElement("ol");
+
+                    //totalperc
+                    if (obj.hasOwnProperty('totalperc')) {
+
+                        if (obj.agentperc.length == 0) {
+                            var element = document.createElement("li");
+                            element.classList.add('total-perc');
+                            textNode = document.createTextNode(obj.totalperc);
+                            element.appendChild(textNode);
+                            ulElement.appendChild(element);
+                        } else {
+                            this.createListDetail("Kullanım Oranı: ", obj.totalperc, ulElement);
+                        }
+                    }
+
+                    //totalcall
+                    if (obj.hasOwnProperty('totalcall')) {
+                        this.createListDetail("Toplam Çağrı Sayısı: ", obj.totalcall, ulElement, true);
+                    }
+
+                    //totalagent
+                    if (obj.hasOwnProperty('totalagent')) {
+                        this.createListDetail("Toplam MT'ye Giden Çağrı: ", obj.totalagent, ulElement);
+                    }
+
+                    //totalhangup
+                    if (obj.hasOwnProperty('totalhangup')) {
+                        this.createListDetail("Toplam Hangup Olan Çağrı: ", obj.totalhangup, ulElement);
+                    }
+
+                    //totaldisconnect
+                    if (obj.hasOwnProperty('totaldisconnect')) {
+                        this.createListDetail("Toplam Disconnect Olan Çağrı: ", obj.totaldisconnect,
+                            ulElement);
+                    }
+
+
+                    //hangupperc
+                    if (obj.hasOwnProperty('hangupperc')) {
+
+                        if (obj.hangupperc.length != 0) {
+                            this.createListDetail("Hangup Oranı: ", obj.hangupperc, ulElement);
+                        }
+                    }
+
+                    //agentperc
+                    if (obj.hasOwnProperty('agentperc')) {
+
+                        if (obj.agentperc.length != 0) {
+                            this.createListDetail("Agent Oranı: ", obj.agentperc, ulElement);
+                        }
+                    }
+
+                    var signElement = that.createSignItem();
+
+                    //append to containerElement
+                    containerElement.appendChild(signElement);
+                    containerElement.appendChild(titleElement);
+                    containerElement.appendChild(ulElement);
+
+                    // el.appendChild(containerElement);
+                    result.appendChild(containerElement);
+
+                    if (obj.hasOwnProperty('details')) {
+                        var wrapper = document.createElement(child_wrapper);
+                        // wrapper.style.display = "none";
+
+                        var els = that.recursive_tree(obj.details, tag, child_wrapper);
+
+                        if (els.hasChildNodes()) {
+                            wrapper.appendChild(els);
+                        } else {
+                            containerElement.removeChild(signElement);
+                        }
+                        result.appendChild(wrapper);
+                    }
+
+
+                });
+                return result;
+            }
+
+            createSignItem() {
+
+                var root = document.createElement("div");
+                root.classList.add("circle-plus");
+                root.classList.add("closed");
+
+                var item = document.createElement("div");
+                item.classList.add("circle");
+
+                var itemH = document.createElement("div");
+                itemH.classList.add("horizontal");
+
+                var itemV = document.createElement("div");
+                itemV.classList.add("vertical");
+
+                item.appendChild(itemH);
+                item.appendChild(itemV);
+
+                root.appendChild(item);
+
+                return root;
+            }
+
+            visor(event) {
+
+                var moduleItem = event.target;
+                console.log(moduleItem);
+
+
+                var icon = event.target.firstChild;
+                if (icon instanceof HTMLElement) {
+
+                    if (icon.classList.contains("opened")) {
+                        icon.classList.remove("opened");
+                        moduleItem.classList.remove("moduleopened")
+                    } else {
+                        moduleItem.classList.add("moduleopened")
+                        icon.classList.add("opened")
+                    }
+                }
+
+                var ul = moduleItem.nextSibling;
+
+                if (ul.classList.contains("active"))
+                    ul.classList.remove("active");
+                else {
+                    ul.classList.add("active");
+                }
+
+                var getSiblings = n => [...n.parentElement.children].filter(c => c != n);
+                var siblingsList = getSiblings(moduleItem);
+                siblingsList.forEach(sibling => {
+                    if (sibling.classList.contains('moduleopened')) {
+
+                        sibling.nextSibling.classList = "";
+
+                        sibling.classList.remove('moduleopened');
+                        sibling.firstChild.classList.remove("opened");
+                    }
+                });
+
+            }
+
+
+            createListDetail(title, detail, wrapper, isTotal) {
+
+                var document = window.document;
+
+                var element = document.createElement("li");
+
+                var dataElement = document.createElement("span");
+
+                if (isTotal) {
+                    dataElement.style.width = "200px";
+                }
+
+                var textNode = document.createTextNode(title);
+                dataElement.appendChild(textNode);
+
+                var detailElement = document.createElement("span");
+                detailElement.style.fontStyle = "oblique";
+                detailElement.style.fontWeight = "600";
+                detailElement.style.fontSize = "1.1em";
+
+
+                textNode = document.createTextNode(detail);
+                detailElement.appendChild(textNode);
+
+                element.appendChild(dataElement);
+                element.appendChild(detailElement);
+
+                wrapper.appendChild(element);
+            }
+
+        }
+
+        window.customElements.define(BlgIvr.is, BlgIvr);
+    </script>
+</dom-module>

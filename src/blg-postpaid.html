@@ -1,0 +1,115 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="./model/blg-ivr.html">
+
+<dom-module id="blg-postpaid">
+  <template>
+
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      .card {
+        padding: 0;
+      }
+
+      .card .ivr-title {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        padding: 0px 20px;
+        background: var(--oredata-color);
+        background: #fff;
+        border-bottom: 3px solid var(--oredata-color);
+        /* @apply --shadow-elevation-2dp; */
+      }
+
+      .card .ivr-title h1 {
+        margin: 0;
+        font-weight: 500;
+        color: #222;
+      }
+
+      .card .ivr-title vaadin-date-picker {
+        color: #fff;
+        margin-top: -10px;
+      }
+
+
+
+      .card .ivr-container {
+        margin: 20px;
+      }
+
+      .flex {
+        @apply --layout-flex;
+      }
+    </style>
+    <div class="card">
+      <div class="ivr-title">
+        <h1>IVR Analytics | Postpaid</h1>
+        <div class="flex"></div>
+        <vaadin-date-picker label="Tarih" placeholder="IVR Tarih Seçiniz" value="2018-03-07">
+        </vaadin-date-picker>
+      </div>
+      <div class="ivr-container">
+        <blg-ivr></blg-ivr>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class BlgPostpaid extends Polymer.Element {
+      static get is() {
+        return 'blg-postpaid';
+      }
+
+      /**
+       * Called every time the element is inserted into the DOM. Useful for 
+       * running setup code, such as fetching resources or rendering.
+       * Generally, you should try to delay work until this time.
+       */
+      connectedCallback() {
+        super.connectedCallback();
+
+        // Set the Finnish locale.
+        moment.locale('tr');
+
+        // Assign the i18n property with locale data from Moment.js.
+        this.shadowRoot.querySelector('vaadin-date-picker').i18n = {
+          monthNames: moment.months(),
+          weekdays: moment.weekdays(),
+          weekdaysShort: moment.weekdaysShort(),
+          firstDayOfWeek: moment.localeData().firstDayOfWeek(),
+          formatDate: function (d) {
+            return moment(d).format(moment.localeData().longDateFormat('L'));
+          },
+          parseDate: function (s) {
+            return moment(s, moment.localeData().longDateFormat('L')).toDate();
+          },
+          formatTitle: function (monthName, fullYear) {
+            return monthName + ' ' + fullYear;
+          }
+        };
+
+      }
+    }
+
+    window.customElements.define(BlgPostpaid.is, BlgPostpaid);
+  </script>
+</dom-module>
