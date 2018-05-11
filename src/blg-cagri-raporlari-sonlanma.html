@@ -1,0 +1,64 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./model/blg-report-viewer.html">
+
+<dom-module id="blg-cagri-raporlari-sonlanma">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+        <blg-report-viewer title="Çağrı Raporları Sonlanma" image="../images/reports/sonlamaoranlar.png"></blg-report-viewer>
+    </template>
+
+    <script>
+        /**
+         * `blg-cagri-raporlari-sonlanma` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class BlgCagriRaporlariSonlanma extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'blg-cagri-raporlari-sonlanma';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+                    
+                });
+            }
+
+        }
+
+        window.customElements.define(BlgCagriRaporlariSonlanma.is, BlgCagriRaporlariSonlanma);
+    </script>
+</dom-module>

@@ -33,10 +33,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="blg-icons.html">
 
-<link rel="lazy-import" href="./blg-home.html">
+<!-- <link rel="lazy-import" href="./blg-home.html"> -->
 <link rel="lazy-import" href="./blg-postpaid.html">
 <link rel="lazy-import" href="./blg-prepaid.html">
 <link rel="lazy-import" href="./blg-view404.html">
+
+
+<link rel="lazy-import" href="./blg-cagri-raporlari-sonlanma.html">
+<link rel="lazy-import" href="./blg-cagri-raporlari-hangup.html">
+<link rel="lazy-import" href="./blg-ivr-raporlari-postpaid-anamenu-sonlanma.html">
+<link rel="lazy-import" href="./blg-ivr-raporlari-postpaid-anamenu-agent.html">
+<link rel="lazy-import" href="./blg-ivr-raporlari-postpaid-anamenu-tuslama.html">
+<link rel="lazy-import" href="./blg-ivr-raporlari-fatura-anamenu-tuslama.html">
+<link rel="lazy-import" href="./blg-ivr-raporlari-tarife-anamenu-tuslama.html">
 
 <link rel="import" href="./model/blg-drawer-item.html">
 <link rel="import" href="./model/blg-copyright.html">
@@ -55,7 +64,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --oredata-color: #20B4E8;
         --oredata-color: #1c9dca;
         --oredata-black: #222;
-        --app-drawer-width: 200px;
+        --app-drawer-width: 300px;
       }
 
       a {
@@ -176,17 +185,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: bold;
       }
 
-      #postpaidItem, #prepaidItem {
-        height: 0;
-        opacity: 0;
+      #postpaidItem,
+      #prepaidItem {
+        max-height: 0;
+        /* opacity: 0; */
         margin: 0;
         overflow: hidden;
         transition: opacity 0.3s ease-out;
+        overflow: hidden;
+        max-height: 0;
+        -webkit-transition: max-height .3s;
+        -o-transition: max-height .3s;
+        transition: max-height .3s;
       }
 
-      #postpaidItem.active, #prepaidItem.active {
-        opacity: 1;
-        height: auto;
+      #postpaidItem.active,
+      #prepaidItem.active {
+        /* opacity: 1; */
+        max-height: 25rem;
       }
 
       iron-selector a {
@@ -201,10 +217,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       iron-selector a.iron-selected {
         color: var(--app-theme-color);
         font-weight: bold;
-      } 
+      }
 
       iron-selector a.iron-selected paper-item {
         font-weight: bold;
+      }
+
+      .reportitem,
+      .ivrreportitem,
+      .cagrireportitem {
+        max-height: 0;
+        /* opacity: 0; */
+        margin: 0;
+        overflow: hidden;
+        transition: opacity 0.3s ease-out;
+        overflow: hidden;
+        max-height: 0;
+        -webkit-transition: max-height .3s;
+        -o-transition: max-height .3s;
+        transition: max-height .3s;
+        margin-left: 20px;
+      }
+      .cagrireportitem{
+        margin-left: 0;
+      }
+
+      .ivrreportitem {
+        margin: 10px 0px 10px 0px;
+      }
+
+
+
+      .reportitem.active,
+      .ivrreportitem.active,
+      .cagrireportitem.active {
+        max-height: 25rem;
       }
     </style>
 
@@ -227,14 +274,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
           </div>
           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-            <blg-drawer-item name="home" href="[[rootPath]]home" icon="icons:home" title="Home"></blg-drawer-item>
-            <blg-drawer-item name="analyzer" icon="icons:timeline" title="Analyzer" on-tap="_onTapAnalyzerItem"></blg-drawer-item>
-              <a name="postpaid" href="[[rootPath]]postpaid" id="postpaidItem">
-                <paper-item slot="item-icon">Postpaid</paper-item>
+            <!-- <blg-drawer-item name="home" href="[[rootPath]]home" icon="icons:home" title="Home"></blg-drawer-item> -->
+            <blg-drawer-item name="analyzer" icon="icons:timeline" title="IVR Ağaç Analizi" on-tap="_onTapAnalyzerItem"></blg-drawer-item>
+            <a name="postpaid" href="[[rootPath]]postpaid" id="postpaidItem">
+              <paper-item slot="item-icon">Postpaid</paper-item>
+            </a>
+            <a name="prepaid" href="[[rootPath]]prepaid" id="prepaidItem">
+              <paper-item slot="item-icon">Prepaid</paper-item>
+            </a>
+            <blg-drawer-item name="report" icon="icons:receipt" title="Raporlar" on-tap="_onTapReportItem"></blg-drawer-item>
+            <div class="reportitem">
+              <paper-item slot="item-icon" on-tap="_onTapCagriReportItem">Çağrı Raporları</paper-item>
+              <a name="cagri-raporlari-sonlanma" href="[[rootPath]]cagri-raporlari-sonlanma" class="cagrireportitem">
+                <paper-item slot="item-icon">Sonlanma Kodu
+                  <paper-item>
               </a>
-              <a name="prepaid" href="[[rootPath]]prepaid" id="prepaidItem">
-                <paper-item slot="item-icon">Prepaid</paper-item>
+              <a name="cagri-raporlari-hangup" href="[[rootPath]]cagri-raporlari-hangup" class="cagrireportitem">
+                <paper-item slot="item-icon">Hangup
+                  <paper-item>
               </a>
+            </div>
+            <div class="reportitem">
+              <paper-item slot="item-icon" on-tap="_onTapIvrReportItem">IVR Raporları</paper-item>
+              <a name="ivr-raporlari-postpaid-anamenu-sonlanma" href="[[rootPath]]ivr-raporlari-postpaid-anamenu-sonlanma" class="ivrreportitem">
+                <paper-item slot="item-icon">Postpaid Anamenü IVR Sonlanma Kodu
+                  <paper-item>
+              </a>
+              <a name="ivr-raporlari-postpaid-anamenu-agent" href="[[rootPath]]ivr-raporlari-postpaid-anamenu-agent" class="ivrreportitem">
+                <paper-item slot="item-icon">Postpaid Anamenü IVR Agent
+                  <paper-item>
+              </a>
+              <a name="ivr-raporlari-postpaid-anamenu-tuslama" href="[[rootPath]]ivr-raporlari-postpaid-anamenu-tuslama" class="ivrreportitem">
+                <paper-item slot="item-icon">Postpaid Anamenü IVR Tuşlama Kullanım
+                  <paper-item>
+              </a>
+              <a name="ivr-raporlari-fatura-anamenu-tuslama" href="[[rootPath]]ivr-raporlari-fatura-anamenu-tuslama" class="ivrreportitem">
+                <paper-item slot="item-icon">Fatura Anamenü IVR Tuşlama Kullanım
+                  <paper-item>
+              </a>
+              <a name="ivr-raporlari-tarife-anamenu-tuslama" href="[[rootPath]]ivr-raporlari-tarife-anamenu-tuslama" class="ivrreportitem">
+                <paper-item slot="item-icon">Tarife Anamenü IVR Tuşlama Kullanım
+                  <paper-item>
+              </a>
+            </div>
+
           </iron-selector>
         </section>
 
@@ -258,9 +341,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header>
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <blg-home name="home"></blg-home>
+          <!-- <blg-home name="home"></blg-home> -->
           <blg-postpaid name="postpaid"></blg-postpaid>
           <blg-prepaid name="prepaid"></blg-prepaid>
+
+          <blg-cagri-raporlari-sonlanma name="cagri-raporlari-sonlanma"></blg-cagri-raporlari-sonlanma>
+          <blg-cagri-raporlari-hangup name="cagri-raporlari-hangup"></blg-cagri-raporlari-hangup>
+          <blg-ivr-raporlari-postpaid-anamenu-sonlanma name="ivr-raporlari-postpaid-anamenu-sonlanma"></blg-ivr-raporlari-postpaid-anamenu-sonlanma>
+          <blg-ivr-raporlari-postpaid-anamenu-agent name="ivr-raporlari-postpaid-anamenu-agent"></blg-ivr-raporlari-postpaid-anamenu-agent>
+          <blg-ivr-raporlari-postpaid-anamenu-tuslama name="ivr-raporlari-postpaid-anamenu-tuslama"></blg-ivr-raporlari-postpaid-anamenu-tuslama>
+          <blg-ivr-raporlari-fatura-anamenu-tuslama name="ivr-raporlari-fatura-anamenu-tuslama"></blg-ivr-raporlari-fatura-anamenu-tuslama>
+          <blg-ivr-raporlari-tarife-anamenu-tuslama name="ivr-raporlari-tarife-anamenu-tuslama"></blg-ivr-raporlari-tarife-anamenu-tuslama>
+
+
           <blg-view404 name="view404"></blg-view404>
         </iron-pages>
         <blg-copyright></blg-copyright>
@@ -303,7 +396,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'home' in that case.
-        this.page = page || 'home';
+        this.page = page || 'postpaid';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -328,15 +421,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _onTapAnalyzerItem() {
         let post = this.$.postpaidItem;
         let pre = this.$.prepaidItem;
-        
+
         this._checkActiveClass(post, "active");
         this._checkActiveClass(pre, "active")
 
-       
+      }
+
+      _onTapCagriReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.cagrireportitem');
+        list.forEach(element => {
+          this._checkActiveClass(element, "active");
+        });
+      }
+
+      _onTapIvrReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.ivrreportitem');
+        list.forEach(element => {
+          this._checkActiveClass(element, "active");
+        });
+      }
+
+      _onTapReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.reportitem');
+        list.forEach(element => {
+          this._checkActiveClass(element, "active");
+        });
 
       }
 
-      _checkActiveClass(item, className){
+
+      _checkActiveClass(item, className) {
         if (item.classList.contains(className)) {
           item.classList.remove(className);
         } else {

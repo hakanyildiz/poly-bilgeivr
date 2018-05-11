@@ -59,16 +59,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .flex {
         @apply --layout-flex;
       }
+
+      .not-found-data {
+        min-height: 50px;
+        font-weight: bold;
+        font-size: 20px;
+      }
     </style>
     <div class="card">
       <div class="ivr-title">
         <h1>IVR Analytics | Postpaid</h1>
         <div class="flex"></div>
-        <vaadin-date-picker label="Tarih" placeholder="IVR Tarih Seçiniz" value="2018-03-07">
+        <vaadin-date-picker label="Tarih" placeholder="IVR Tarih Seçiniz" value="{{datevalue}}">
         </vaadin-date-picker>
       </div>
       <div class="ivr-container">
-        <blg-ivr></blg-ivr>
+
+        <template is="dom-if" if=[[showIVR]]>
+          <blg-ivr></blg-ivr>
+        </template>
+
+
+        <template is="dom-if" if=[[!showIVR]]>
+          <h4 class="not-found-data">
+            Veri Bulunamadı!
+
+          </h4>
+        </template>
+
+
+
       </div>
     </div>
   </template>
@@ -79,11 +99,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return 'blg-postpaid';
       }
 
-      /**
-       * Called every time the element is inserted into the DOM. Useful for 
-       * running setup code, such as fetching resources or rendering.
-       * Generally, you should try to delay work until this time.
-       */
+      static get properties() {
+        return {
+          datevalue: {
+            type: String,
+            value: '2018-03-05',
+            observer: '_datevalueChanged'
+          },
+          showIVR: {
+            type: Boolean,
+            value: true,
+            notify: true
+          }
+        };
+      }
+
+      _datevalueChanged(newValue, oldVal) {
+        if (newValue !== '') {
+          console.log('datevalue', newValue);
+
+          if (newValue === "2018-03-05") {
+            console.log('gridi');
+
+            this.set('showIVR', true);
+          } else {
+            this.set('showIVR', false);
+          }
+        }
+
+      }
+
       connectedCallback() {
         super.connectedCallback();
 
@@ -108,6 +153,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
 
       }
+    
     }
 
     window.customElements.define(BlgPostpaid.is, BlgPostpaid);
