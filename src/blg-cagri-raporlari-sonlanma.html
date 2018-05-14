@@ -8,7 +8,11 @@
                 display: block
             }
         </style>
-        <blg-report-viewer title="Çağrı Raporları Sonlanma" image="../images/reports/sonlamaoranlar.png"></blg-report-viewer>
+
+        <blg-report-viewer title="Çağrı Raporları Sonlanma" image="../images/reports/sonlamaoranlar.png"
+        type='pie' options='{"title": "Çağrı Raporları Sonlanma"}' data='[ ["Report", "Process"], ["Hangup", 46.5], ["Disconnect", 3.5], ["Agent", 50] ]'
+        ></blg-report-viewer>
+        
     </template>
 
     <script>

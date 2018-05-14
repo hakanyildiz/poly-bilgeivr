@@ -243,7 +243,8 @@
               "agentperc": "0%",
               "hangupperc": "0%",
               "dtmf": "2",
-              "details": []
+              "details": [],
+              "highlight": true
             },
             {
               "detailname": "Diğer(Ana Menü, Hangup, vb.)",

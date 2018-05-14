@@ -152,6 +152,10 @@
                 margin: 0;
             }
 
+            .highlight {
+                background: rgba(255, 0, 0, 0.8) !important;
+            }
+
             ul.active {
                 opacity: 1;
                 height: auto;
@@ -380,6 +384,11 @@
                             ulElement);
                     }
 
+                    if (obj.hasOwnProperty('highlight')) {
+
+                        if (obj.hasOwnProperty('highlight') == true)
+                            containerElement.classList.add('highlight');
+                    }
 
                     //hangupperc
                     if (obj.hasOwnProperty('hangupperc')) {

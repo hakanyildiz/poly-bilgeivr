@@ -8,7 +8,19 @@
                 display: block
             }
         </style>
-        <blg-report-viewer title="Tarife Anamenü Tuslama" image="../images/reports/tarifeanamenukullanim.png"></blg-report-viewer>
+        <!-- <blg-report-viewer title="Tarife Anamenü Tuslama" image="../images/reports/tarifeanamenukullanim.png"></blg-report-viewer> -->
+
+        <blg-report-viewer title="Tarife Anamenü Tuslama" image="../images/reports/tarifeanamenukullanim.png"
+        type='column' options='{"title": "Tarife Anamenü Tuslama"}' 
+        data='[ ["DTMF", "Process", { "role": "style" } ], 
+            ["1:Tarife İşlemleri", 25.7, "color: green"],
+            ["2:Taahhüt İşlemleri", 14, "color: red"],
+            ["3:Kalan Kullanım", 12.7, "color: yellow"],
+            ["4:Yurtdışı Servisler", 1.2, "color: blue"],
+            ["0.MT Transfer", 51.8, "color: purple"]
+            ]'
+        ></blg-report-viewer>
+
     </template>
 
     <script>

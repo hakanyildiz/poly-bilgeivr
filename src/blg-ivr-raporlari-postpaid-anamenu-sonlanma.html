@@ -8,7 +8,13 @@
                 display: block
             }
         </style>
-        <blg-report-viewer title="Postpaid Anamenu Sonlanma" image="../images/reports/postpaidsonlanma.png"></blg-report-viewer>
+        <!-- <blg-report-viewer title="Postpaid Anamenu Sonlanma" image="../images/reports/postpaidsonlanma.png"></blg-report-viewer> -->
+        
+        <blg-report-viewer  title="Postpaid Anamenü Sonlanma" image="../images/reports/postpaidsonlanma.png"
+        type='pie' options='{"title": "Postpaid Anamenü Sonlanma"}'
+         data='[ ["Report", "Process"], ["Hangup", 23.5], ["Disconnect", 4.2], ["Agent", 72.3] ]'
+        ></blg-report-viewer>
+
     </template>
 
     <script>
