@@ -24,7 +24,8 @@
     "paper-fab": "PolymerElements/paper-fab#^2.1.0",
     "vaadin-date-picker": "vaadin/vaadin-date-picker#^3.0.0",
     "moment": "^2.22.1",
-    "google-chart": "^2.0.0"
+    "google-chart": "^2.0.0",
+    "paper-progress": "PolymerElements/paper-progress#^2.1.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"
