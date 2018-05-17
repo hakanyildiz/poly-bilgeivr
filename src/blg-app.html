@@ -29,23 +29,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-icons/places-icons.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../bower_components/paper-item/paper-item.html">
 
 <link rel="import" href="blg-icons.html">
 
-<!-- <link rel="lazy-import" href="./blg-home.html"> -->
-<link rel="lazy-import" href="./blg-postpaid.html">
-<link rel="lazy-import" href="./blg-prepaid.html">
-<link rel="lazy-import" href="./blg-view404.html">
-
-
-<link rel="lazy-import" href="./blg-cagri-raporlari-sonlanma.html">
-<link rel="lazy-import" href="./blg-cagri-raporlari-hangup.html">
-<link rel="lazy-import" href="./blg-ivr-raporlari-postpaid-anamenu-sonlanma.html">
-<link rel="lazy-import" href="./blg-ivr-raporlari-postpaid-anamenu-agent.html">
-<link rel="lazy-import" href="./blg-ivr-raporlari-postpaid-anamenu-tuslama.html">
-<link rel="lazy-import" href="./blg-ivr-raporlari-fatura-anamenu-tuslama.html">
-<link rel="lazy-import" href="./blg-ivr-raporlari-tarife-anamenu-tuslama.html">
+<link rel="lazy-import" href="./blg-404-page.html">
+<link rel="lazy-import" href="./blg-analyzer-page.html">
+<link rel="lazy-import" href="./blg-report-page.html">
 
 <link rel="import" href="./model/blg-drawer-item.html">
 <link rel="import" href="./model/blg-copyright.html">
@@ -224,9 +213,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: bold;
       }
 
+      .analyzer-list,
       .reportitem,
       .ivrreportitem,
-      .cagrireportitem {
+      .cagrireportitem,
+      .drawercontentitem {
         max-height: 0;
         /* opacity: 0; */
         margin: 0;
@@ -239,7 +230,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         transition: max-height .3s;
         margin-left: 20px;
       }
-      .cagrireportitem{
+
+      .cagrireportitem {
         margin-left: 0;
       }
 
@@ -247,13 +239,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 10px 0px 10px 0px;
       }
 
-
-
+      .analyzer-list.active,
       .reportitem.active,
       .ivrreportitem.active,
-      .cagrireportitem.active {
-        max-height: 25rem;
+      .cagrireportitem.active,
+      .drawercontentitem.active {
+        max-height: 35rem;
       }
+
+
+      /* iron-selector .analyzer-item a paper-item[blgfocused],
+      iron-selector .reportitem a paper-item[blgfocused]{
+          color: #222;
+        
+      } */
     </style>
 
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
@@ -275,47 +274,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
           </div>
           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-            <!-- <blg-drawer-item name="home" href="[[rootPath]]home" icon="icons:home" title="Home"></blg-drawer-item> -->
             <blg-drawer-item name="analyzer" icon="icons:timeline" title="IVR Ağaç Analizi" on-tap="_onTapAnalyzerItem"></blg-drawer-item>
-            <a name="postpaid" href="[[rootPath]]postpaid" id="postpaidItem">
-              <paper-item slot="item-icon">Postpaid</paper-item>
-            </a>
-            <a name="prepaid" href="[[rootPath]]prepaid" id="prepaidItem">
-              <paper-item slot="item-icon">Prepaid</paper-item>
-            </a>
+            <div class="analyzer-list">
+              <a name="analyzer" href="[[rootPath]]analyzer/postpaid">
+                <paper-item slot="item-icon">Postpaid</paper-item>
+              </a>
+              <a name="analyzer" href="[[rootPath]]analyzer/prepaid">
+                <paper-item slot="item-icon">Prepaid</paper-item>
+              </a>
+            </div>
             <blg-drawer-item name="report" icon="icons:receipt" title="Raporlar" on-tap="_onTapReportItem"></blg-drawer-item>
             <div class="reportitem">
               <paper-item slot="item-icon" on-tap="_onTapCagriReportItem">Çağrı Raporları</paper-item>
-              <a name="cagri-raporlari-sonlanma" href="[[rootPath]]cagri-raporlari-sonlanma" class="cagrireportitem">
-                <paper-item slot="item-icon">Sonlanma Kodu
-                  <paper-item>
+              <a name="cagri-raporlari-sonlanma" href="[[rootPath]]report/cagri-raporlari-sonlanma" class="cagrireportitem">
+                <paper-item slot="item-icon" role="menuitem">Sonlanma Kodu</paper-item>
               </a>
-              <a name="cagri-raporlari-hangup" href="[[rootPath]]cagri-raporlari-hangup" class="cagrireportitem">
-                <paper-item slot="item-icon">Hangup
-                  <paper-item>
+              <a name="cagri-raporlari-hangup" href="[[rootPath]]report/cagri-raporlari-hangup" class="cagrireportitem">
+                <paper-item slot="item-icon"> Hangup
+                </paper-item>
               </a>
             </div>
             <div class="reportitem">
               <paper-item slot="item-icon" on-tap="_onTapIvrReportItem">IVR Raporları</paper-item>
-              <a name="ivr-raporlari-postpaid-anamenu-sonlanma" href="[[rootPath]]ivr-raporlari-postpaid-anamenu-sonlanma" class="ivrreportitem">
-                <paper-item slot="item-icon">Postpaid Anamenü IVR Sonlanma Kodu
-                  <paper-item>
+              <a name="ivr-raporlari-postpaid-anamenu-sonlanma" href="[[rootPath]]report/ivr-raporlari-postpaid-anamenu-sonlanma" class="ivrreportitem">
+                <paper-item slot="item-icon"> Postpaid Anamenü IVR Sonlanma Kodu
+                </paper-item>
               </a>
-              <a name="ivr-raporlari-postpaid-anamenu-agent" href="[[rootPath]]ivr-raporlari-postpaid-anamenu-agent" class="ivrreportitem">
-                <paper-item slot="item-icon">Postpaid Anamenü IVR Agent
-                  <paper-item>
+              <a name="ivr-raporlari-postpaid-anamenu-agent" href="[[rootPath]]report/ivr-raporlari-postpaid-anamenu-agent" class="ivrreportitem">
+                <paper-item slot="item-icon"> Postpaid Anamenü IVR Agent
+                </paper-item>
               </a>
-              <a name="ivr-raporlari-postpaid-anamenu-tuslama" href="[[rootPath]]ivr-raporlari-postpaid-anamenu-tuslama" class="ivrreportitem">
-                <paper-item slot="item-icon">Postpaid Anamenü IVR Tuşlama Kullanım
-                  <paper-item>
+              <a name="ivr-raporlari-postpaid-anamenu-tuslama" href="[[rootPath]]report/ivr-raporlari-postpaid-anamenu-tuslama" class="ivrreportitem">
+                <paper-item slot="item-icon"> Postpaid Anamenü IVR Tuşlama Kullanım
+                </paper-item>
               </a>
-              <a name="ivr-raporlari-fatura-anamenu-tuslama" href="[[rootPath]]ivr-raporlari-fatura-anamenu-tuslama" class="ivrreportitem">
-                <paper-item slot="item-icon">Fatura Anamenü IVR Tuşlama Kullanım
-                  <paper-item>
+              <a name="ivr-raporlari-fatura-anamenu-tuslama" href="[[rootPath]]report/ivr-raporlari-fatura-anamenu-tuslama" class="ivrreportitem">
+                <paper-item slot="item-icon"> Fatura Anamenü IVR Tuşlama Kullanım
+                </paper-item>
               </a>
-              <a name="ivr-raporlari-tarife-anamenu-tuslama" href="[[rootPath]]ivr-raporlari-tarife-anamenu-tuslama" class="ivrreportitem">
-                <paper-item slot="item-icon">Tarife Anamenü IVR Tuşlama Kullanım
-                  <paper-item>
+              <a name="ivr-raporlari-tarife-anamenu-tuslama" href="[[rootPath]]report/ivr-raporlari-tarife-anamenu-tuslama" class="ivrreportitem">
+                <paper-item slot="item-icon"> Tarife Anamenü IVR Tuşlama Kullanım
+                </paper-item>
               </a>
             </div>
 
@@ -332,30 +331,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>BILGE</div>
             <div class="flex">
-
             </div>
             <div class="button-group">
               <paper-icon-button icon="icons:power-settings-new"></paper-icon-button>
             </div>
-
           </app-toolbar>
         </app-header>
-
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <!-- <blg-home name="home"></blg-home> -->
-          <blg-postpaid name="postpaid"></blg-postpaid>
-          <blg-prepaid name="prepaid"></blg-prepaid>
-
-          <blg-cagri-raporlari-sonlanma name="cagri-raporlari-sonlanma"></blg-cagri-raporlari-sonlanma>
-          <blg-cagri-raporlari-hangup name="cagri-raporlari-hangup"></blg-cagri-raporlari-hangup>
-          <blg-ivr-raporlari-postpaid-anamenu-sonlanma name="ivr-raporlari-postpaid-anamenu-sonlanma"></blg-ivr-raporlari-postpaid-anamenu-sonlanma>
-          <blg-ivr-raporlari-postpaid-anamenu-agent name="ivr-raporlari-postpaid-anamenu-agent"></blg-ivr-raporlari-postpaid-anamenu-agent>
-          <blg-ivr-raporlari-postpaid-anamenu-tuslama name="ivr-raporlari-postpaid-anamenu-tuslama"></blg-ivr-raporlari-postpaid-anamenu-tuslama>
-          <blg-ivr-raporlari-fatura-anamenu-tuslama name="ivr-raporlari-fatura-anamenu-tuslama"></blg-ivr-raporlari-fatura-anamenu-tuslama>
-          <blg-ivr-raporlari-tarife-anamenu-tuslama name="ivr-raporlari-tarife-anamenu-tuslama"></blg-ivr-raporlari-tarife-anamenu-tuslama>
-
-
-          <blg-view404 name="view404"></blg-view404>
+        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
+          <blg-analyzer-page name="analyzer" route={{subroute}}></blg-analyzer-page>
+          <blg-report-page name="report" route={{subroute}}></blg-report-page>
+          <blg-404-page name="404"></blg-404-page>
         </iron-pages>
         <!-- <blg-dynamic-chart></blg-dynamic-chart> -->
 
@@ -387,6 +372,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          firstPain: {
+            type: Boolean,
+            value: true
+          }
+
         };
       }
 
@@ -399,7 +389,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'home' in that case.
-        this.page = page || 'postpaid';
+        this.page = page || 'analyzer';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -408,8 +398,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _pageChanged(page) {
+        if(this.firstPain){
+          this._toggleDrawerItemAccordingToPage(page);
+          this.set('firstPain', false);
+        }
         // Load page import on demand. Show 404 page if fails
-        const resolvedPageUrl = this.resolveUrl('blg-' + page + '.html');
+        const resolvedPageUrl = this.resolveUrl('blg-' + page + '-page.html');
         Polymer.importHref(
           resolvedPageUrl,
           null,
@@ -417,17 +411,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           true);
       }
 
+      _toggleDrawerItemAccordingToPage(page) {
+        console.log(this.route.path.split('/')[2]);
+
+        if (page === 'analyzer') {
+          this._onTapAnalyzerItem();
+
+        } else if (page === 'report') {
+          this._onTapReportItem();
+          if (this.route.path.includes('cagri-raporlari')) {
+            this._onTapCagriReportItem();
+
+          } else {
+            this._onTapIvrReportItem();
+
+          }
+
+        }
+      }
+
+      _setOnFocusDrawerItem(itemList, targetKey) {
+        // this._setOnFocusDrawerItem(this.shadowRoot.querySelectorAll('.ivrreportitem'), this.route.path.split(
+        //       '/')[2]);
+        // itemList.forEach(element => {
+
+        //   if (element.getAttribute('name') === targetKey) {
+        //     console.log(element.firstChild.nextElementSibling);
+        //     element.firstChild.nextElementSibling.focused = true;
+        //   }
+        // });
+      }
+
       _showPage404() {
-        this.page = 'view404';
+        this.page = '404';
       }
 
       _onTapAnalyzerItem() {
-        let post = this.$.postpaidItem;
-        let pre = this.$.prepaidItem;
-
-        this._checkActiveClass(post, "active");
-        this._checkActiveClass(pre, "active")
-
+        // let post = this.$.postpaidItem;
+        // // let pre = this.$.prepaidItem;
+        // this._checkActiveClass(post, "active");
+        // this._checkActiveClass(pre, "active")
+        let list = this.shadowRoot.querySelector('.analyzer-list');
+        this._checkActiveClass(list, "active");
       }
 
       _onTapCagriReportItem() {
@@ -449,16 +474,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         list.forEach(element => {
           this._checkActiveClass(element, "active");
         });
-
       }
-
-
       _checkActiveClass(item, className) {
         if (item.classList.contains(className)) {
           item.classList.remove(className);
         } else {
           item.classList.add(className);
         }
+      }
+
+      _onTapDrawerItem(event) {
+        let nextSibling = event.target.nextElementSibling;
+        this._checkActiveClass(nextSibling, "active");
       }
     }
 

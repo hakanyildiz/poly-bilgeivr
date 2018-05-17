@@ -76,7 +76,7 @@
         </style>
         <div class="card">
             <div class="ivr-title">
-                <h1>[[title]]</h1>
+                <h1>[[chartData.title]]</h1>
                 <div class="flex"></div>
                 <vaadin-date-picker label="Tarih" placeholder="Tarih Seçiniz" value="{{datevalue}}">
                 </vaadin-date-picker>
@@ -97,7 +97,7 @@
                             cols='[{"label":"Report", "type":"string"}, {"label":"Process", "type":"number"}]'
                             rows='[["Hangup", 46.5],["Disconnect", 3.5],["Agent", 50]]'>
                         -->
-                        <google-chart type=[[type]] options=[[options]] data=[[data]]></google-chart>
+                        <google-chart type=[[chartData.type]] options=[[chartData.options]] data=[[chartData.data]]></google-chart>
 
                     </div>
                 </template>
@@ -159,16 +159,19 @@
                         type: Object,
                         value: {}
                     },
+                    chartData: {
+                        type: Object,
+                        value: {}
+                    }
                 };
             }
 
             _datevalueChanged(newValue, oldVal) {
                 if (newValue !== '') {
-                    console.log('datevalue', newValue);
+                    // console.log('datevalue', newValue);
 
                     if (newValue === "2018-03-05") {
-                        console.log('gridi');
-
+                        // console.log('gridi');
                         this.set('showIVR', true);
                     } else {
                         this.set('showIVR', false);

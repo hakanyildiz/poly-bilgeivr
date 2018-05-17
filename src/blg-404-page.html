@@ -9,29 +9,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="shared-styles.html">
 
-<dom-module id="blg-prepaid">
+<dom-module id="blg-404-page">
   <template>
-    <style include="shared-styles">
-        :host {
-          display: block;
-  
-          padding: 10px;
-        }
-      </style>
-  
-      <div class="card">
-        <h1>Prepaid</h1>
-        <p><i>Veri Bulunamadı!</i></p>
-      </div>
-    </template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 10px 20px;
+      }
+    </style>
+
+    404 - Böyle Bir Sayfa Bulunamadı! <a href="[[rootPath]]">Anasayfaya Geri Dön</a>
+  </template>
 
   <script>
-    class BlgPrepaid extends Polymer.Element {
-      static get is() { return 'blg-prepaid'; }
+    class BlgView404Page extends Polymer.Element {
+      static get is() { return 'blg-404-page'; }
+      static get properties() {
+        return {
+          // This shouldn't be neccessary, but the Analyzer isn't picking up
+          // Polymer.Element#rootPath
+          rootPath: String,
+        };
+      }
     }
 
-    window.customElements.define(BlgPrepaid.is, BlgPrepaid);
+    window.customElements.define(BlgView404Page.is, BlgView404Page);
   </script>
 </dom-module>

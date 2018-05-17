@@ -25,7 +25,8 @@
     "vaadin-date-picker": "vaadin/vaadin-date-picker#^3.0.0",
     "moment": "^2.22.1",
     "google-chart": "^2.0.0",
-    "paper-progress": "PolymerElements/paper-progress#^2.1.1"
+    "paper-progress": "PolymerElements/paper-progress#^2.1.1",
+    "iron-collapse": "PolymerElements/iron-collapse#^2.2.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"

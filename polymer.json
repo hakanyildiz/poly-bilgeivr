@@ -2,10 +2,9 @@
   "entrypoint": "index.html",
   "shell": "src/blg-app.html",
   "fragments": [
-    "src/blg-home.html",
-    "src/blg-postpaid.html",
-    "src/blg-prepaid.html",
-    "src/blg-view404.html"
+    "src/blg-analyzer-page.html",
+    "src/blg-report-page.html",
+    "src/blg-404-page.html"
   ],
   "sources": [
     "images/**/*",

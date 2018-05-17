@@ -1,0 +1,339 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./model/blg-report-viewer.html">
+
+<dom-module id="blg-report-page">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 10px;
+            }
+
+            .card {
+                padding: 0;
+            }
+
+            .card .ivr-title {
+                height: 80px;
+                display: flex;
+                align-items: center;
+                padding: 0px 20px;
+                background: var(--oredata-color);
+                background: #fff;
+                border-bottom: 3px solid var(--oredata-color);
+            }
+
+            .card .ivr-title h1 {
+                margin: 0;
+                font-weight: 500;
+                color: #222;
+                text-transform: capitalize
+            }
+
+            .card .ivr-title vaadin-date-picker {
+                color: #fff;
+                margin-top: -10px;
+            }
+
+            .card .ivr-container {
+                margin: 20px;
+            }
+
+            .flex {
+                @apply --layout-flex;
+            }
+
+            .not-found-data {
+                min-height: 50px;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .card.inactive-container h3 {
+                font-weight: 400;
+                margin: 14px;
+                padding: 14px
+            }
+        </style>
+
+        <app-route route="{{route}}" pattern="/:reportsubpage" data="{{data}}" active="{{selectedReportPageActive}}"></app-route>
+        <div hidden$=[[selectedReportPageActive]]>
+            <div class="card inactive-container">
+                <h3> Aradığınız kriterlerde bir sayfa bulunmamaktadır!
+                </h3>
+            </div>
+        </div>
+        <div hidden$=[[!selectedReportPageActive]]>
+            <blg-report-viewer chart-data=[[chartData]]></blg-report-viewer>
+        </div>
+
+
+    </template>
+
+    <script>
+        /**
+         * `blg-report-page` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class BlgReportPage extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'blg-report-page';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    selectedReportPageActive: Boolean,
+                    route: Object,
+                    data: Object,
+                    datevalue: {
+                        type: String,
+                        value: '2018-03-05',
+                        observer: '_datevalueChanged'
+                    },
+                    chartData: {
+                        type: Object,
+                        value: function () {
+                            return {
+                                title: null,
+                                image: null,
+                                type: null,
+                                options: null,
+                                data: null
+                            }
+                        }
+                    },
+
+                };
+            }
+
+            static get observers() {
+                return [
+                    '_routeSubPageChanged(data.reportsubpage)',
+                ];
+            }
+
+            _routeSubPageChanged(reportsubpage) {
+                // console.log('this.route', this.route);
+                // console.log('reportsubpage', reportsubpage);
+
+                if (!this.route || !this.route.path || this.route.path.length === 1) {
+                    this.set('route.path', 'cagri-raporlari-sonlanma');
+                }
+
+                if (this.route.path === '/cagri-raporlari-sonlanma' ||
+                    this.route.path === '/cagri-raporlari-hangup' ||
+                    this.route.path === '/ivr-raporlari-postpaid-anamenu-sonlanma' ||
+                    this.route.path === '/ivr-raporlari-postpaid-anamenu-agent' ||
+                    this.route.path === '/ivr-raporlari-postpaid-anamenu-tuslama' ||
+                    this.route.path === '/ivr-raporlari-fatura-anamenu-tuslama' ||
+                    this.route.path === '/ivr-raporlari-tarife-anamenu-tuslama'
+                ) {
+                    this.set('selectedReportPageActive', true);
+                    this.set('ivrtype', reportsubpage);
+
+                    this._prepareDataForChart(reportsubpage);
+
+                } else {
+                    this.set('selectedReportPageActive', false);
+                }
+
+            }
+
+            _prepareDataForChart(reportsubpage) {
+                // console.log(reportsubpage);
+                let data = {};
+                switch (reportsubpage) {
+                    case 'cagri-raporlari-sonlanma':
+                        data = {
+                            title: "Çağrı Raporları Sonlanma",
+                            image: "../images/reports/sonlamaoranlar.png",
+                            type: "pie",
+                            options: {
+                                "title": "Çağrı Raporları Sonlanma"
+                            },
+                            data: [
+                                ["Report", "Process"],
+                                ["Hangup", 46.5],
+                                ["Disconnect", 3.5],
+                                ["Agent", 50]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+                    case 'cagri-raporlari-hangup':
+                        data = {
+                            title: "Çağrı Raporları Hangup",
+                            image: "../images/reports/hanguporanlar.png",
+                            type: "pie",
+                            options: {
+                                "title": "Çağrı Raporları Hangup"
+                            },
+                            data: [
+                                ["Report", "Process"],
+                                ["Postpaid Anamenü IVR", 33.9],
+                                ["Köpük Çağrı", 18.7],
+                                ["Proaktivite", 47.7]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+                    case 'ivr-raporlari-fatura-anamenu-tuslama':
+                        data = {
+                            title: "Fatura Anamenü Kullanım",
+                            image: "../images/reports/faturaanamenukullanim.png",
+                            type: 'column',
+                            options: {
+                                "title": "Fatura Anamenü Kullanım"
+                            },
+                            data: [
+                                ["DTMF", "Process", {
+                                    "role": "style"
+                                }],
+                                ["1:Fatura ödeme", 8.3, "color: green"],
+                                ["2:Tarife Detaylar", 21.6, "color: red"],
+                                ["3:Güncel Fatura", 29.9, "color: yellow"],
+                                ["4:E-Fatura Servisi", 3.2, "color: blue"],
+                                ["5.Numara Değişikliği", 0.9, "color: brown"],
+                                ["6.Geçmiş Çağrılar", 3.5, "color: pink"],
+                                ["0.MT Transfer", 62.3, "color: purple"]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+                    case 'ivr-raporlari-postpaid-anamenu-agent':
+                        data = {
+                            title: "Postpaid Anamenü Agent",
+                            image: "../images/reports/postpaidagentoranlar.png",
+                            type: "pie",
+                            options: {
+                                "title": "Postpaid Anamenü Agent"
+                            },
+                            data: [
+                                ["Report", "Process"],
+                                ["0.MT Transfer", 7.9],
+                                ["1.Fatura Ana Menü", 23.1],
+                                ["2.Tarife Anamenü", 35.4],
+                                ["3.Kampanyalar", 17.1],
+                                ["4.Yeni Paketler", 9.6],
+                                ["5.OTA", 6.4],
+                                ["6.Kayıp Çalıntı", 6.9]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+                    case 'ivr-raporlari-postpaid-anamenu-sonlanma':
+                        data = {
+                            title: "Postpaid Anamenü Sonlanma",
+                            image: "../images/reports/postpaidsonlanma.png",
+                            type: "pie",
+                            options: {
+                                "title": "Postpaid Anamenü Sonlanma"
+                            },
+                            data: [
+                                ["Report", "Process"],
+                                ["Hangup", 23.5],
+                                ["Disconnect", 4.2],
+                                ["Agent", 72.3]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+                    case 'ivr-raporlari-postpaid-anamenu-tuslama':
+                        data = {
+                            title: "Postpaid Anamenü Tuslama",
+                            image: "../images/reports/postpaidkullanim.png",
+                            type: "column",
+                            options: {
+                                "title": "Postpaid Anamenü Tuslama"
+                            },
+                            data: [
+                                ["DTMF", "Process", {
+                                    "role": "style"
+                                }],
+                                ["1:Fatura", 22.7, "color: green"],
+                                ["2:Tarife", 34.2, "color: red"],
+                                ["3:Kampanyalar", 14.8, "color: yellow"],
+                                ["4:Yeni Paketler", 12, "color: blue"],
+                                ["5:OTA", 6.4, "color: brown"],
+                                ["6:Kayıp Çalıntı", 6.5, "color: pink"],
+                                ["0:MT Transfer", 5.8, "color: purple"]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+                    case 'ivr-raporlari-tarife-anamenu-tuslama':
+                        data = {
+                            title: "Tarife Anamenü Tuslama",
+                            image: "../images/reports/tarifeanamenukullanim.png",
+                            type: "column",
+                            options: {
+                                "title": "Tarife Anamenü Tuslama"
+                            },
+                            data: [
+                                ["DTMF", "Process", {
+                                    "role": "style"
+                                }],
+                                ["1:Tarife İşlemleri", 25.7, "color: green"],
+                                ["2:Taahhüt İşlemleri", 14, "color: red"],
+                                ["3:Kalan Kullanım", 12.7, "color: yellow"],
+                                ["4:Yurtdışı Servisler", 1.2, "color: blue"],
+                                ["0.MT Transfer", 51.8, "color: purple"]
+                            ]
+                        };
+                        this.set('chartData', data);
+                        break;
+
+                }
+
+                // console.log(this.chartData);
+
+            }
+
+            constructor() {
+                super();
+            }
+
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {
+
+                });
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+            }
+
+
+            _datevalueChanged(newValue, oldVal) {
+                if (newValue !== '') {
+                    // console.log('datevalue', newValue);
+
+                    if (newValue === "2018-03-05") {
+                        this.set('showIVR', true);
+                    } else {
+                        this.set('showIVR', false);
+                    }
+                }
+
+            }
+
+
+        }
+
+        window.customElements.define(BlgReportPage.is, BlgReportPage);
+    </script>
+</dom-module>
