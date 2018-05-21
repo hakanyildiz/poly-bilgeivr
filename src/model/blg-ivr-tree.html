@@ -217,6 +217,7 @@
                 padding: 0px 7px;
                 font-size: 1em;
                 width: 160px;
+                font-weight: bold !important;
             }
 
             li.total-perc {
@@ -232,6 +233,23 @@
                 font-size: 20px;
                 margin: 0;
                 margin-top: 6px;
+            }
+
+            .module-item h1,
+            .module-item h2,
+            .module-item h3,
+            .module-item h4,
+            .module-item h5,
+            .module-item h6 {
+                pointer-events: none;
+                padding: 0px 7px;
+                font-weight: 500;
+            }
+
+            .module-item .titleElement {
+                pointer-events: none;
+                width: 220px;
+                margin: 0px 10px;
             }
         </style>
         <div id="app" class="horizontal-flex"></div>
@@ -273,14 +291,14 @@
             constructor() {
                 super();
             }
-            
+
             _ivrtypeChanged(newVal, oldVal) {
                 // console.log('_ivrtypeChanged', newVal);
-                if(newVal) {
+                if (newVal) {
                     this._clearTree();
                     let jsonUrl = './src/ivr/ivr-' + this.ivrtype + '.json';
                     this._init(jsonUrl);
-                } 
+                }
             }
 
             /**
@@ -290,7 +308,7 @@
                 super.ready();
 
                 Polymer.RenderStatus.afterNextRender(this, function () {
-                  
+
                 });
             }
 
@@ -362,18 +380,33 @@
 
                     //Firstly, we should check if it includes 'modulename' or 'detailname' property
                     var textNode = "";
-                    var titleElement = document.createElement("h3");
+                    var titleElement = document.createElement("div");
+                    titleElement.classList.add('titleElement');
                     if (obj.hasOwnProperty('modulename')) {
                         //modulename
+                        var element = document.createElement("h3");
                         textNode = document.createTextNode(obj.modulename);
+                        element.appendChild(textNode);
+                        titleElement.appendChild(element);
+                    }
+
+                    if (obj.hasOwnProperty('nodedesctag')) {
+                        //nodedesctag
+                        var element = document.createElement("h5");
+                        textNode = document.createTextNode(obj.nodedesctag);
+                        element.appendChild(textNode);
+                        titleElement.appendChild(element);
                     }
 
                     if (obj.hasOwnProperty('detailname')) {
                         //detailname
+                        var element = document.createElement("h6");
                         textNode = document.createTextNode(obj.detailname);
+                        element.appendChild(textNode);
+                        titleElement.appendChild(element);
                     }
 
-                    titleElement.appendChild(textNode);
+                    // titleElement.appendChild(textNode);
 
                     //other details wrapper 
                     var ulElement = document.createElement("ol");
@@ -388,7 +421,7 @@
                             element.appendChild(textNode);
                             ulElement.appendChild(element);
                         } else {
-                            this.createListDetail("Kullanım Oranı: ", obj.totalperc, ulElement);
+                            this.createListDetail("Kullanım Oranı: ", '%' + this.roundToTwo(parseFloat(obj.totalperc)), ulElement);
                         }
                     }
 
@@ -413,17 +446,31 @@
                             ulElement);
                     }
 
-                    if (obj.hasOwnProperty('highlight')) {
+                    //beginddate
+                    if (obj.hasOwnProperty('beginddate')) {
+                        this.createListDetail("Başlangıç Tarihi: ", obj.beginddate,
+                            ulElement);
+                    }
 
-                        if (obj.hasOwnProperty('highlight') == true)
-                            containerElement.classList.add('highlight');
+                    //enddate
+                    if (obj.hasOwnProperty('enddate')) {
+                        this.createListDetail("Bitiş Tarihi: ", obj.enddate,
+                            ulElement);
+                    }
+
+                    //disconnectperc
+                    if (obj.hasOwnProperty('disconnectperc')) {
+
+                        if (obj.disconnectperc.length != 0) {
+                            this.createListDetail("Disconnect Oranı: ", '%' +  this.roundToTwo(parseFloat(obj.disconnectperc)), ulElement);
+                        }
                     }
 
                     //hangupperc
                     if (obj.hasOwnProperty('hangupperc')) {
 
                         if (obj.hangupperc.length != 0) {
-                            this.createListDetail("Hangup Oranı: ", obj.hangupperc, ulElement);
+                            this.createListDetail("Hangup Oranı: ", '%' +  this.roundToTwo(parseFloat(obj.hangupperc)), ulElement);
                         }
                     }
 
@@ -431,7 +478,7 @@
                     if (obj.hasOwnProperty('agentperc')) {
 
                         if (obj.agentperc.length != 0) {
-                            this.createListDetail("Agent Oranı: ", obj.agentperc, ulElement);
+                            this.createListDetail("Agent Oranı: " , '%' +  this.roundToTwo(parseFloat(obj.agentperc)), ulElement);
                         }
                     }
 
@@ -485,6 +532,10 @@
                 root.appendChild(item);
 
                 return root;
+            }
+
+            roundToTwo(num) {
+                return +(Math.round(num + "e+2")  + "e-2"); 
             }
 
             visor(event) {

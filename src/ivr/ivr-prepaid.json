@@ -1,0 +1,391 @@
+{
+  "modulename": "Postpaid Ana Menü",
+  "totalcall": "39.399",
+  "totalagent": "28682",
+  "totalhangup": "9295",
+  "totaldisconnect": "1422", 
+  "details": [
+    {
+      "modulename": "Fatura Ana Menü",
+      "totalperc": "22.7%",
+      "agentperc": "23.1%",
+      "hangupperc": "22.4%",
+      "disconnectperc": "15.4%",
+      "dtmf": "1",
+      "details": [
+        {
+          "modulename": "Fatura Ödeme",
+          "totalperc": "8.3%",
+          "agentperc": "1%",
+          "hangupperc": "26.9%",
+          "dtmf": "1",
+          "details": [
+            {
+              "detailname": "Faturası Olmayanlar",
+              "totalperc": "37.7%",
+              "agentperc": "31.8%",
+              "hangupperc": "38.7%",
+              "dtmf": "",
+              "details": []
+            },
+            {
+              "detailname": "Faturası Olanlar",
+              "totalperc": "62.3%",
+              "agentperc": "68.2%",
+              "hangupperc": "61.3%",
+              "dtmf": "",
+              "details": [
+                {
+                  "detailname": "İşlem Yapanlar",
+                  "totalperc": "32%",
+                  "agentperc": "",
+                  "hangupperc": "",
+                  "dtmf": "",
+                  "details": []
+                },
+                {
+                  "detailname": "İşlem Yapmayanlar",
+                  "totalperc": "64%",
+                  "agentperc": "",
+                  "hangupperc": "",
+                  "dtmf": "",
+                  "details": []
+                },
+                {
+                  "detailname": "Diğer",
+                  "totalperc": "4%",
+                  "agentperc": "",
+                  "hangupperc": "",
+                  "dtmf": "",
+                  "details": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "modulename": "Fatura Detaylar",
+          "totalperc": "21.6%",
+          "agentperc": "13.3%",
+          "hangupperc": "48.1%",
+          "dtmf": "2",
+          "details": [
+            {
+              "detailname": "Faturası Olmayanlar",
+              "totalperc": "31.4%",
+              "agentperc": "35.8%",
+              "hangupperc": "28%",
+              "dtmf": "",
+              "details": []
+            },
+            {
+              "detailname": "Faturası Olanlar",
+              "totalperc": "68.6%",
+              "agentperc": "64.2%",
+              "hangupperc": "72%",
+              "dtmf": "",
+              "details": [
+                {
+                  "detailname": "Fatura Ödemeye Gidenler",
+                  "totalperc": "2%",
+                  "agentperc": "",
+                  "hangupperc": "",
+                  "dtmf": "1",
+                  "details": []
+                },
+                {
+                  "detailname": "SMS ile Detay İsteyenler",
+                  "totalperc": "8%",
+                  "agentperc": "",
+                  "hangupperc": "",
+                  "dtmf": "2",
+                  "details": []
+                },
+                {
+                  "detailname": "Diğer(Ana Menü, Hangup, vb.)",
+                  "totalperc": "90%",
+                  "agentperc": "",
+                  "hangupperc": "",
+                  "dtmf": "",
+                  "details": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "modulename": "Güncel Fatura",
+          "totalperc": "29.9%",
+          "agentperc": "13.6%",
+          "hangupperc": "8.2%",
+          "dtmf": "3",
+          "details": []
+        },
+        {
+          "modulename": "E-Fatura Servisleri",
+          "totalperc": "3.2%",
+          "agentperc": "1.6%",
+          "hangupperc": "7.4%",
+          "dtmf": "4",
+          "details": [
+            {
+              "detailname": "E-Fatura Aktivasyon",
+              "totalperc": "37.5%",
+              "agentperc": "25%",
+              "hangupperc": "50%",
+              "dtmf": "1",
+              "details": []
+            },
+            {
+              "detailname": "Otomatik Ödeme Talimatı",
+              "totalperc": "20%",
+              "agentperc": "20%",
+              "hangupperc": "20%",
+              "dtmf": "2",
+              "details": []
+            },
+            {
+              "detailname": "Fatura Üst Limit",
+              "totalperc": "8.5%",
+              "agentperc": "7%",
+              "hangupperc": "10%",
+              "dtmf": "3",
+              "details": []
+            }
+          ]
+        },
+        {
+          "modulename": "Numara Değişikliği",
+          "totalperc": "0.9%",
+          "agentperc": "1.1%",
+          "hangupperc": "0.5%",
+          "dtmf": "5",
+          "details": [
+            {
+              "detailname": "Numara Değişikliği Bilgi Alma",
+              "totalperc": "95%",
+              "agentperc": "",
+              "hangupperc": "",
+              "dtmf": "1",
+              "details": []
+            },
+            {
+              "detailname": "Numara Değişiklik İşlemi",
+              "totalperc": "5%",
+              "agentperc": "",
+              "hangupperc": "",
+              "dtmf": "2",
+              "details": []
+            }
+          ]
+        },
+        {
+          "modulename": "Geçmiş Çağrı Detaylarını E-Mail İle alma",
+          "totalperc": "3.5%",
+          "agentperc": "2.4%",
+          "hangupperc": "6.7%",
+          "dtmf": "6",
+          "details": []
+        },
+        {
+          "modulename": "MT Transfer",
+          "totalperc": "62.3%",
+          "agentperc": "67%",
+          "hangupperc": "1.5%",
+          "dtmf": "0",
+          "details": []
+        }
+      ]
+    },
+    {
+      "modulename": "Tarife Ana Menü",
+      "totalperc": "34.2%",
+      "agentperc": "35.4%",
+      "hangupperc": "29.5%",
+      "disconnectperc": "41.1%",
+      "dtmf": "2",
+      "details": [
+        {
+          "modulename": "Tarife İşlemleri",
+          "totalperc": "25.7%",
+          "agentperc": "23.5%",
+          "hangupperc": "23.2%",
+          "dtmf": "1",
+          "details": [
+            {
+              "detailname": "Tarifeler Hakkında Bilgi Alma",
+              "totalperc": "15.8%",
+              "agentperc": "12.2%",
+              "hangupperc": "25.9%",
+              "dtmf": "1",
+              "details": [
+                {
+                  "detailname": "Seçilen Tarifenin Detayını Dinleyenler",
+                  "totalperc": "25.1%",
+                  "agentperc": "12.8%",
+                  "hangupperc": "41.2%",
+                  "dtmf": "D",
+                  "details": []
+                },
+                {
+                  "detailname": "Diğer(Ana Menü, Hangup, vb.)",
+                  "totalperc": "74.9%",
+                  "agentperc": "87.2%",
+                  "hangupperc": "58.8%",
+                  "dtmf": "D",
+                  "details": []
+                }
+              ]
+            },
+            {
+              "detailname": "Tarifesini Değiştirenler",
+              "totalperc": "0%",
+              "agentperc": "0%",
+              "hangupperc": "0%",
+              "dtmf": "2",
+              "details": [],
+              "highlight": true
+            },
+            {
+              "detailname": "Diğer(Ana Menü, Hangup, vb.)",
+              "totalperc": "84.2%",
+              "agentperc": "87.8%",
+              "hangupperc": "74.1%",
+              "dtmf": "",
+              "details": []
+            }
+          ]
+        },
+        {
+          "modulename": "Taahhüt İşlemleri",
+          "totalperc": "14%",
+          "agentperc": "12.1%",
+          "hangupperc": "19.3%",
+          "dtmf": "2",
+          "details": []
+        },
+        {
+          "modulename": "Kalan Kullanım",
+          "totalperc": "12.7%",
+          "agentperc": "2.3%",
+          "hangupperc": "51.7%",
+          "dtmf": "3",
+          "details": [
+            {
+              "modulename": "Kalan Kullanım Detaylarını Dinleyenler",
+              "totalperc": "96%",
+              "agentperc": "97%",
+              "hangupperc": "95%",
+              "dtmf": "",
+              "details": [
+                {
+                  "modulename": "Paket Sunulanlar",
+                  "totalperc": "8.3%",
+                  "agentperc": "21.4%",
+                  "hangupperc": "6.1%",
+                  "dtmf": "1",
+                  "details": []
+                }
+              ]
+            },
+            {
+              "modulename": "Kalan Datası 0 Olanlar",
+              "totalperc": "3.5%",
+              "agentperc": "3%",
+              "hangupperc": "4.5%",
+              "dtmf": "",
+              "details": [
+                {
+                  "modulename": "Paket Sunulanlar",
+                  "totalperc": "15.4%",
+                  "agentperc": "30%",
+                  "hangupperc": "8.9%",
+                  "dtmf": "1",
+                  "details": []
+                }
+              ]
+            },
+            {
+              "modulename": "FKT Nedeniyle Kalan Datası Bulunmayanlar",
+              "totalperc": "0.5%",
+              "agentperc": "0%",
+              "hangupperc": "0.5%",
+              "dtmf": "",
+              "details": [
+                {
+                  "modulename": "Paket Sunulanlar",
+                  "totalperc": "0%",
+                  "agentperc": "0%",
+                  "hangupperc": "0%",
+                  "dtmf": "1",
+                  "details": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "modulename": "Yurtdışı Servisleri",
+          "totalperc": "1.2%",
+          "agentperc": "0.8%",
+          "hangupperc": "2.5%",
+          "dtmf": "4",
+          "details": []
+        },
+        {
+          "modulename": "MT Transfer",
+          "totalperc": "51.8%",
+          "agentperc": "68%",
+          "hangupperc": "3%",
+          "dtmf": "0",
+          "details": []
+        }
+      ]
+    },
+    {
+      "modulename": "Kampanyalar",
+      "totalperc": "14.8%",
+      "agentperc": "17.1%",
+      "hangupperc": "8.7%",
+      "disconnectperc": "9.5%",
+      "dtmf": "3",
+      "details": []
+    },
+    {
+      "modulename": "Yeni Paketler",
+      "totalperc": "12%",
+      "agentperc": "9.6%",
+      "hangupperc": "20.4%",
+      "disconnectperc": "5.8%",
+      "dtmf": "4",
+      "details": []
+    },
+    {
+      "modulename": "OTA",
+      "totalperc": "6.4%",
+      "agentperc": "6.4%",
+      "hangupperc": "6.2%",
+      "disconnectperc": "7.9%",
+      "dtmf": "5",
+      "details": []
+    },
+    {
+      "modulename": "Kayıp Çalıntı",
+      "totalperc": "6.5%",
+      "agentperc": "6.9%",
+      "hangupperc": "5.7%",
+      "disconnectperc": "4.5%",
+      "dtmf": "6",
+      "details": []
+    },
+    {
+      "modulename": "MT Transfer",
+      "totalperc": "5.8%",
+      "agentperc": "7.9%",
+      "hangupperc": "0%",
+      "disconnectperc": "0%",
+      "dtmf": "0",
+      "details": []
+    }
+  ]
+}
