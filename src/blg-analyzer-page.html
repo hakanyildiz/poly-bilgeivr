@@ -70,12 +70,12 @@
                 <div class="ivr-title">
                     <h1>IVR Analytics | [[ivrtype]]</h1>
                     <div class="flex"></div>
-                    <vaadin-date-picker label="Tarih" placeholder="IVR Tarih Seçiniz" value="{{datevalue}}">
+                    <vaadin-date-picker label="Tarih" placeholder="IVR Tarih Seçiniz" value=[[datevalue]] on-value-changed="_selectedDataChanged">
                     </vaadin-date-picker>
                 </div>
                 <div class="ivr-container">
                     <template is="dom-if" if=[[showIVR]]>
-                        <blg-ivr-tree ivrtype=[[ivrtype]]></blg-ivr-tree>
+                         <blg-ivr-tree ivrtype=[[ivrtype]] selecteddate=[[datevalue]]></blg-ivr-tree>
                     </template>
                     <template is="dom-if" if=[[!showIVR]]>
                         <h4 class="not-found-data">
@@ -118,8 +118,10 @@
                     data: Object,
                     datevalue: {
                         type: String,
-                        value: '2018-03-05',
-                        observer: '_datevalueChanged'
+                        value: function () {
+                            return this._getCurrentDay();
+                        }
+                        // observer: '_datevalueChanged'
                     },
                     showIVR: {
                         type: Boolean,
@@ -201,21 +203,43 @@
                     }
                 };
             }
+            
+            _selectedDataChanged(event){
+                if ( event.detail != '' ) {
+                    this.set('datevalue', event.detail.value);
+                }
+            }
 
+            _getCurrentDay() {
+                // console.log(moment().format(moment.localeData().longDateFormat('L')));
+                return moment().format('YYYY-MM-DD');
+            }
 
             _datevalueChanged(newValue, oldVal) {
                 if (newValue !== '') {
-                    // console.log('datevalue', newValue);
-
-                    if (newValue === "2018-03-05") {
+                    console.log('_datevalueChanged', newValue);
+                    
+                    var day = parseInt(newValue.split("-")[2]);
+                    
+                    if (day <= 11 && day >= 7)
+                    {
                         this.set('showIVR', true);
-                    } else {
+                    }
+                    else {
                         this.set('showIVR', false);
                     }
+
+                    // console.log(day);
+
+                    // if (newValue === "2018-05-05") {
+                    //     this.set('showIVR', true);
+                    // } else {
+                    //     this.set('showIVR', false);
+                    // }
                 }
 
-            }
 
+            }
 
         }
 
