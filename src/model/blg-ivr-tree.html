@@ -261,6 +261,17 @@
             ol {
                 margin: 0px 10px;
             }
+            
+            .detail-wrapper-element, .details-elements{
+                pointer-events: none;
+            }
+            .details-element{
+                display: flex;
+            }
+            .detail-wrapper-element h4{
+                pointer-events: none;
+            }
+
         </style>
         <div id="app" class="horizontal-flex"></div>
 
@@ -450,9 +461,67 @@
                     // titleElement.appendChild(textNode);
 
                     //other details wrapper 
-                    var ulElement = document.createElement("ol");
-                
+
+                    var detailWrapperElement = document.createElement("div");
+                    detailWrapperElement.classList.add('detail-wrapper-element');
+
+                    var detailsElement = document.createElement("div");
+                    detailsElement.classList.add('details-element');
+
+                    var totalOlElement = document.createElement("ol");
                     var percentOlElement = document.createElement("ol");
+                    detailsElement.appendChild(totalOlElement);
+                    detailsElement.appendChild(percentOlElement);
+
+                    if (level == 0) {
+                        var totalTitleElement = document.createElement("h4");
+                        var xtextNode = document.createTextNode("Toplam Çağrı: " + parseInt( obj.totalcall * 100 / obj.totalperc ) + 
+                        " |  Toplam Agent: " + parseInt( obj.totalagent * 100 / obj.agentperc) +
+                        " |  Toplam Hangup: " + parseInt( obj.totalhangup * 100 / obj.hangupperc) +
+                        " |  Toplam Disconnect: " + parseInt( obj.totaldisconnect * 100 / obj.disconnectperc)
+                        
+                        );
+                        totalTitleElement.appendChild(xtextNode);
+                        
+                        detailWrapperElement.appendChild(totalTitleElement);
+
+
+                        //totalcall
+                        if (obj.hasOwnProperty('totalcall')) {
+                            this.createListDetail("Çağrı Sayısı: ", obj.totalcall, totalOlElement,
+                                true);
+                        }
+
+                        //totalagent
+                        if (obj.hasOwnProperty('totalagent')) {
+                            this.createListDetail("MT'ye Giden Çağrı: ", obj.totalagent,
+                                totalOlElement);
+                        }
+
+                        //totalhangup
+                        if (obj.hasOwnProperty('totalhangup')) {
+                            this.createListDetail("Hangup Olan Çağrı: ", obj.totalhangup,
+                                totalOlElement);
+                        }
+
+                        //totaldisconnect
+                        if (obj.hasOwnProperty('totaldisconnect')) {
+                            this.createListDetail("Disconnect Olan Çağrı: ", obj.totaldisconnect,
+                                totalOlElement);
+                        }
+
+                        //beginddate
+                        // if (obj.hasOwnProperty('beginddate')) {
+                        //     this.createListDetail("Başlangıç Tarihi: ", obj.beginddate,
+                        //         totalOlElement);
+                        // }
+
+                        //enddate
+                        // if (obj.hasOwnProperty('enddate')) {
+                        //     this.createListDetail("Bitiş Tarihi: ", obj.enddate,
+                        //         totalOlElement);
+                        // }
+                    }
 
                     //totalperc
                     if (obj.hasOwnProperty('totalperc')) {
@@ -469,47 +538,22 @@
                                     obj.totalperc)), percentOlElement);
                         }
                     }
-                    if (level == 0) {
+                    //agentperc
+                    if (obj.hasOwnProperty('agentperc')) {
 
-                        //totalcall
-                        if (obj.hasOwnProperty('totalcall')) {
-                            this.createListDetail("Toplam Çağrı Sayısı: ", obj.totalcall, ulElement,
-                                true);
+                        if (obj.agentperc.length != 0) {
+                            this.createListDetail("Agent Oranı: ", '%' + this.roundToTwo(parseFloat(obj
+                                .agentperc)), percentOlElement);
                         }
-
-                        //totalagent
-                        if (obj.hasOwnProperty('totalagent')) {
-                            this.createListDetail("Toplam MT'ye Giden Çağrı: ", obj.totalagent,
-                                ulElement);
-                        }
-
-                        //totalhangup
-                        if (obj.hasOwnProperty('totalhangup')) {
-                            this.createListDetail("Toplam Hangup Olan Çağrı: ", obj.totalhangup,
-                                ulElement);
-                        }
-
-                        //totaldisconnect
-                        if (obj.hasOwnProperty('totaldisconnect')) {
-                            this.createListDetail("Toplam Disconnect Olan Çağrı: ", obj.totaldisconnect,
-                                ulElement);
-                        }
-
-                        //beginddate
-                        // if (obj.hasOwnProperty('beginddate')) {
-                        //     this.createListDetail("Başlangıç Tarihi: ", obj.beginddate,
-                        //         ulElement);
-                        // }
-
-                        //enddate
-                        // if (obj.hasOwnProperty('enddate')) {
-                        //     this.createListDetail("Bitiş Tarihi: ", obj.enddate,
-                        //         ulElement);
-                        // }
                     }
+                    //hangupperc
+                    if (obj.hasOwnProperty('hangupperc')) {
 
-
-
+                        if (obj.hangupperc.length != 0) {
+                            this.createListDetail("Hangup Oranı: ", '%' + this.roundToTwo(parseFloat(
+                                obj.hangupperc)), percentOlElement);
+                        }
+                    }
                     //disconnectperc
                     if (obj.hasOwnProperty('disconnectperc')) {
 
@@ -519,23 +563,9 @@
                         }
                     }
 
-                    //hangupperc
-                    if (obj.hasOwnProperty('hangupperc')) {
 
-                        if (obj.hangupperc.length != 0) {
-                            this.createListDetail("Hangup Oranı: ", '%' + this.roundToTwo(parseFloat(
-                                obj.hangupperc)), percentOlElement);
-                        }
-                    }
 
-                    //agentperc
-                    if (obj.hasOwnProperty('agentperc')) {
 
-                        if (obj.agentperc.length != 0) {
-                            this.createListDetail("Agent Oranı: ", '%' + this.roundToTwo(parseFloat(obj
-                                .agentperc)), percentOlElement);
-                        }
-                    }
 
                     var signElement = that.createSignItem();
 
@@ -543,8 +573,12 @@
                     containerElement.appendChild(signElement);
                     containerElement.appendChild(titleElement);
                     
-                    containerElement.appendChild(percentOlElement);
-                    containerElement.appendChild(ulElement);
+                    
+                    detailWrapperElement.appendChild(detailsElement);
+
+                    containerElement.appendChild(detailWrapperElement);
+                    // containerElement.appendChild(percentOlElement);
+                    // containerElement.appendChild(totalOlElement);
 
                     // el.appendChild(containerElement);
                     result.appendChild(containerElement);
