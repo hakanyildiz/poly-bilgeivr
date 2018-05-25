@@ -300,7 +300,11 @@
                         type: String,
                         observer: '_selectedDateChanged'
                     },
-                    loading: Boolean
+                    loading: Boolean,
+                    hakkeday: {
+                        type: String,
+                        value: ''
+                    }
                 };
             }
 
@@ -317,7 +321,7 @@
                 // console.log('_ivrtypeChanged', newVal);
                 if (newVal && oldVal !== undefined) {
                     this._clearTree();
-                    let jsonUrl = './src/ivr/' + this.selecteddate + '-' + this.ivrtype + '.json';
+                    let jsonUrl = './src/ivr/' + this.hakkeday + '-' + this.ivrtype + '.json';
                     this._init(jsonUrl);
                 }
             }
@@ -327,6 +331,7 @@
                 if (newVal) {
                     this.set('loading', true);
                     this._clearTree();
+                    this.set('hakkeday', newVal);
                     setTimeout(() => {
                         let jsonUrl = './src/ivr/' + newVal + '-' + this.ivrtype + '.json';
                         this._init(jsonUrl);
