@@ -257,6 +257,10 @@
                 margin-top: -40px;
                 position: absolute;
             }
+
+            ol {
+                margin: 0px 10px;
+            }
         </style>
         <div id="app" class="horizontal-flex"></div>
 
@@ -442,6 +446,8 @@
 
                     //other details wrapper 
                     var ulElement = document.createElement("ol");
+                
+                    var percentOlElement = document.createElement("ol");
 
                     //totalperc
                     if (obj.hasOwnProperty('totalperc')) {
@@ -451,15 +457,14 @@
                             element.classList.add('total-perc');
                             textNode = document.createTextNode(obj.totalperc);
                             element.appendChild(textNode);
-                            ulElement.appendChild(element);
+                            percentOlElement.appendChild(element);
                         } else {
                             this.createListDetail("Kullanım Oranı: ", '%' + this.roundToTwo(
                                 parseFloat(
-                                    obj.totalperc)), ulElement);
+                                    obj.totalperc)), percentOlElement);
                         }
                     }
-                    if (level != 0) {
-
+                    if (level == 0) {
 
                         //totalcall
                         if (obj.hasOwnProperty('totalcall')) {
@@ -486,16 +491,16 @@
                         }
 
                         //beginddate
-                        if (obj.hasOwnProperty('beginddate')) {
-                            this.createListDetail("Başlangıç Tarihi: ", obj.beginddate,
-                                ulElement);
-                        }
+                        // if (obj.hasOwnProperty('beginddate')) {
+                        //     this.createListDetail("Başlangıç Tarihi: ", obj.beginddate,
+                        //         ulElement);
+                        // }
 
                         //enddate
-                        if (obj.hasOwnProperty('enddate')) {
-                            this.createListDetail("Bitiş Tarihi: ", obj.enddate,
-                                ulElement);
-                        }
+                        // if (obj.hasOwnProperty('enddate')) {
+                        //     this.createListDetail("Bitiş Tarihi: ", obj.enddate,
+                        //         ulElement);
+                        // }
                     }
 
 
@@ -505,7 +510,7 @@
 
                         if (obj.disconnectperc.length != 0) {
                             this.createListDetail("Disconnect Oranı: ", '%' + this.roundToTwo(
-                                parseFloat(obj.disconnectperc)), ulElement);
+                                parseFloat(obj.disconnectperc)), percentOlElement);
                         }
                     }
 
@@ -514,7 +519,7 @@
 
                         if (obj.hangupperc.length != 0) {
                             this.createListDetail("Hangup Oranı: ", '%' + this.roundToTwo(parseFloat(
-                                obj.hangupperc)), ulElement);
+                                obj.hangupperc)), percentOlElement);
                         }
                     }
 
@@ -523,7 +528,7 @@
 
                         if (obj.agentperc.length != 0) {
                             this.createListDetail("Agent Oranı: ", '%' + this.roundToTwo(parseFloat(obj
-                                .agentperc)), ulElement);
+                                .agentperc)), percentOlElement);
                         }
                     }
 
@@ -532,6 +537,8 @@
                     //append to containerElement
                     containerElement.appendChild(signElement);
                     containerElement.appendChild(titleElement);
+                    
+                    containerElement.appendChild(percentOlElement);
                     containerElement.appendChild(ulElement);
 
                     // el.appendChild(containerElement);
