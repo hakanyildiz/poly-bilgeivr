@@ -1,0 +1,26 @@
+{
+    "type": "pie", 
+    "image": "", 
+    "data": [
+        [
+            "Report", 
+            "Process"
+        ], 
+        [
+            "Hangup", 
+            37.665394918418706
+        ], 
+        [
+            "Agent", 
+            59.2052926373894
+        ], 
+        [
+            "Disconnect", 
+            3.1293124441918985
+        ]
+    ], 
+    "options": {
+        "title": "Sonlanma Kodu"
+    }, 
+    "title": "Sonlanma Kodu"
+}

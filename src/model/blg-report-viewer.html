@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../../bower_components/google-chart/google-chart.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 
 
 <dom-module id="blg-report-viewer">
@@ -72,41 +73,16 @@
                 height: 400px;
                 width: 50em;
             }
-
         </style>
-        <div class="card">
-            <div class="ivr-title">
-                <h1>[[chartData.title]]</h1>
-                <div class="flex"></div>
-                <vaadin-date-picker label="Tarih" placeholder="Tarih Seçiniz" value="{{datevalue}}"></vaadin-date-picker>
-            </div>
-            <div class="ivr-container">
-                <template is="dom-if" if=[[showIVR]]>
-                    <div class="image">
-                        <!-- <iron-image src="[[image]]" preload sizing="cover"></iron-image> -->
 
-                        <!-- Example Of data: 
-                            [["Categories", "Value"], ["Category 1", 1.0], ["Category 2", 1.1]]
-                        
-                            <google-chart .... data='http://example.com/chart-data.json'></google-chart>
-                            <google-chart .... data='[["Categories", "Value"], ["Category 1", 1.0], ["Category 2", 1.1]]'></google-chart>
+        <div id="error" class="horizontal-flex"></div>
+        <div hidden$={{!isData}}>
+            <google-chart type=[[chartData.type]] options=[[chartData.options]] data=[[chartData.data]]></google-chart>
+        </div>
 
-                            or 
-
-                            cols='[{"label":"Report", "type":"string"}, {"label":"Process", "type":"number"}]'
-                            rows='[["Hangup", 46.5],["Disconnect", 3.5],["Agent", 50]]'>
-                        -->
-                        <google-chart type=[[chartData.type]] options=[[chartData.options]] data=[[chartData.data]]></google-chart>
-
-                    </div>
-                </template>
-                <template is="dom-if" if=[[!showIVR]]>
-                    <h4 class="not-found-data">
-                        Veri Bulunamadı!
-                    </h4>
-                </template>
-            </div>
-
+        <div class="loading-panel" hidden$={{!loading}}>
+            <paper-spinner active={{loading}}></paper-spinner>
+        </div>
     </template>
 
     <script>
@@ -128,80 +104,93 @@
 
             static get properties() {
                 return {
-                    title: {
-                        type: String,
-                        value: 'Report'
-                    },
-                    image: {
-                        type: String,
-                        value: ''
-                    },
-                    datevalue: {
-                        type: String,
-                        value: '2018-03-05',
-                        observer: '_datevalueChanged'
-                    },
-                    showIVR: {
-                        type: Boolean,
-                        value: true,
-                        notify: true
-                    },
-                    type: {
-                        type: String,
-                        value: '',
-                    },
-                    options: {
+                    tree: {
                         type: Object,
-                        value: {}
+                        observer: '_treeChanged'
                     },
-                    data: {
-                        type: Object,
-                        value: {}
+                    selecteddate: {
+                        type: String,
+                        observer: '_selectedDateChanged'
                     },
                     chartData: {
                         type: Object,
-                        value: {}
+                        notify: true
+                    },
+                    isData: {
+                        type: Boolean,
+                        value: false,
                     }
                 };
             }
 
-            _datevalueChanged(newValue, oldVal) {
-                if (newValue !== '') {
-                    // console.log('datevalue', newValue);
-
-                    if (newValue === "2018-03-05") {
-                        // console.log('gridi');
-                        this.set('showIVR', true);
-                    } else {
-                        this.set('showIVR', false);
-                    }
+            _treeChanged(tree, oldVal) {
+                // console.log('_treeChanged', tree);
+                if (tree && oldVal !== undefined) {
+                    this._clearTree();
+                    let jsonUrl = './src/ivr/raporlar/' + this.hakkeday + '/' + tree.type + '/' + tree.category +
+                        '/' + tree.title + '.json';
+                    // let jsonUrl = './src/ivr/' + this.hakkeday + '-' + this.ivrtype + '.json';
+                    this._init(jsonUrl);
                 }
+            }
 
+            _selectedDateChanged(newVal, oldVal) {
+                // console.log('_selectedDateChanged', newVal);
+                if (newVal) {
+                    this.set('loading', true);
+                    this._clearTree();
+                    this.set('hakkeday', newVal);
+                    setTimeout(() => {
+                        let jsonUrl = './src/ivr/raporlar/' + this.hakkeday + '/' + this.tree.type +
+                            '/' + this.tree.category + '/' + this.tree.title + '.json';
+                        // let jsonUrl = './src/ivr/' + newVal + '-' + this.ivrtype + '.json';
+                        this._init(jsonUrl);
+                    }, 1000);
+
+                }
+            }
+            _clearTree() {
+                this.$.error.innerHTML = "";
+                // this.set('chartData', {} );
+            }
+
+            _init(jsonUrl) {
+                const that = this;
+                let json = {};
+
+                fetch(jsonUrl)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(myJson => {
+                        this.set('isData', true);
+                        // console.log(myJson);
+                        this.set('chartData', myJson);
+                        // var tree = [myJson];
+                        // var res = that.recursive_tree(tree, 'div', 'ul', 0);
+                        // $app.appendChild(res);
+                        this.set('loading', false);
+                    })
+                    .catch(error => {
+                        this.set('isData', false);
+
+                        // console.log(error);
+                        let $error = this.$.error;
+                        // console.log(error);
+                        let divError = document.createElement('h4');
+                        divError.classList.add('not-found-data');
+                        const textNode = document.createTextNode('Veri Bulunamadı!');
+                        divError.appendChild(textNode);
+                        $error.appendChild(divError);
+                        this.set('loading', false);
+                    });
 
             }
+
+
 
             connectedCallback() {
                 super.connectedCallback();
-
-                // Set the Finnish locale.
-                moment.locale('tr');
-
-                // Assign the i18n property with locale data from Moment.js.
-                this.shadowRoot.querySelector('vaadin-date-picker').i18n = {
-                    monthNames: moment.months(),
-                    weekdays: moment.weekdays(),
-                    weekdaysShort: moment.weekdaysShort(),
-                    firstDayOfWeek: moment.localeData().firstDayOfWeek(),
-                    formatDate: function (d) {
-                        return moment(d).format(moment.localeData().longDateFormat('L'));
-                    },
-                    parseDate: function (s) {
-                        return moment(s, moment.localeData().longDateFormat('L')).toDate();
-                    },
-                    formatTitle: function (monthName, fullYear) {
-                        return monthName + ' ' + fullYear;
-                    }
-                };
 
             }
 

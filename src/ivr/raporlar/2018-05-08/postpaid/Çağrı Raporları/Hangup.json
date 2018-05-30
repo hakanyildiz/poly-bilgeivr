@@ -1,0 +1,34 @@
+{
+    "type": "pie", 
+    "image": "", 
+    "data": [
+        [
+            "Report", 
+            "Process"
+        ], 
+        [
+            "Postpaid Ana Menü", 
+            57.242669113236175
+        ], 
+        [
+            "KYT Proaktivite", 
+            0
+        ], 
+        [
+            "Fatura Proaktivite", 
+            4.072
+        ], 
+        [
+            "Fatura Kesim Proaktivite", 
+            0
+        ], 
+        [
+            "Köpük Çağrı", 
+            38.678
+        ]
+    ], 
+    "options": {
+        "title": "Hangup"
+    }, 
+    "title": "Hangup"
+}

@@ -1,0 +1,52 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "0.MT Transfer", 
+            8.46856929677299, 
+            "color:green"
+        ], 
+        [
+            "1.Fatura Ana Menü", 
+            19.455325498974073, 
+            "color:red"
+        ], 
+        [
+            "2.Tarife Ana Menü", 
+            35.43182242119008, 
+            "color:yellow"
+        ], 
+        [
+            "3.Kampanyalar", 
+            17.109681029658645, 
+            "color:blue"
+        ], 
+        [
+            "4.Yeni Paketler", 
+            11.854131691848535, 
+            "color:lightgray"
+        ], 
+        [
+            "5.OTA", 
+            6.04364857302742, 
+            "color:purple"
+        ], 
+        [
+            "6.Kayıp Çalıntı", 
+            7.013616862525648, 
+            "color:pink"
+        ]
+    ], 
+    "options": {
+        "title": "Postpaid AnaMenü IVR Agent"
+    }, 
+    "title": "Postpaid AnaMenü IVR Agent"
+}

@@ -66,9 +66,29 @@
             </div>
         </div>
         <div hidden$=[[!selectedReportPageActive]]>
-            <blg-report-viewer chart-data=[[chartData]]></blg-report-viewer>
+            <div class="card">
+                <div class="ivr-title">
+                    <h1>IVR Charts | [[tree.type]] [[tree.category]] [[tree.title]]</h1>
+                    <div class="flex"></div>
+                    <vaadin-date-picker label="Tarih" placeholder="IVR Tarih Seçiniz" value=[[datevalue]] on-value-changed="_selectedDataChanged">
+                    </vaadin-date-picker>
+                </div>
+                <div class="ivr-container">
+                    <template is="dom-if" if=[[showIVR]]>
+                        <!-- <blg-ivr-tree ivrtype=[[ivrtype]] selecteddate=[[datevalue]]></blg-ivr-tree> -->
+                        <blg-report-viewer tree=[[tree]] selecteddate=[[datevalue]]></blg-report-viewer>
+                    </template>
+                    <template is="dom-if" if=[[!showIVR]]>
+                        <h4 class="not-found-data">
+                            Veri Bulunamadı!
+                        </h4>
+                    </template>
+                </div>
+            </div>
         </div>
-
+        <!-- <div hidden$=[[!selectedReportPageActive]]>
+            <blg-report-viewer main=[[main]] chart-data=[[chartData]]></blg-report-viewer>
+        </div> -->
 
     </template>
 
@@ -97,11 +117,6 @@
                     selectedReportPageActive: Boolean,
                     route: Object,
                     data: Object,
-                    datevalue: {
-                        type: String,
-                        value: '2018-03-05',
-                        observer: '_datevalueChanged'
-                    },
                     chartData: {
                         type: Object,
                         value: function () {
@@ -114,6 +129,33 @@
                             }
                         }
                     },
+                    tree: {
+                        type: Object,
+                        value: function () {
+                            return {
+                                type: null,
+                                category: null,
+                                title: null
+                            }
+                        }
+                    },
+                    datevalue: {
+                        type: String,
+                        value: function () {
+                            return this._getCurrentDay();
+                        }
+                        // observer: '_datevalueChanged'
+                    },
+                    showIVR: {
+                        type: Boolean,
+                        value: true,
+                        notify: true
+                    },
+                    ivrtype: {
+                        type: String,
+                        notify: true //If true, the property is available for two-way data binding. In addition, an event, property-name-changed is fired whenever the property changes. See Property change notification events (notify) for more information.
+                    }
+
 
                 };
             }
@@ -129,21 +171,64 @@
                 // console.log('reportsubpage', reportsubpage);
 
                 if (!this.route || !this.route.path || this.route.path.length === 1) {
-                    this.set('route.path', 'cagri-raporlari-sonlanma');
+                    this.set('route.path', 'postpaid-cagri-raporlari-sonlanma');
                 }
 
-                if (this.route.path === '/cagri-raporlari-sonlanma' ||
-                    this.route.path === '/cagri-raporlari-hangup' ||
-                    this.route.path === '/ivr-raporlari-postpaid-anamenu-sonlanma' ||
-                    this.route.path === '/ivr-raporlari-postpaid-anamenu-agent' ||
-                    this.route.path === '/ivr-raporlari-postpaid-anamenu-tuslama' ||
-                    this.route.path === '/ivr-raporlari-fatura-anamenu-tuslama' ||
-                    this.route.path === '/ivr-raporlari-tarife-anamenu-tuslama'
+                let path = this.route.path;
+
+
+                //type
+                let treeType = path.split('-')[0].split('/')[1];
+
+                //category
+                let treeCategory = "";
+
+                //title
+                let treeTitle = "";
+
+                if (path.includes('cagri-raporlari')) {
+                    treeCategory = "Çağrı Raporları";
+
+                    if (path.includes('hangup')) {
+                        treeTitle = "Hangup";
+                    } else if (path.includes('sonlanma')) {
+                        treeTitle = "Sonlanma Kodu";
+                    }
+                } else if (path.includes('ivr-raporlari')) {
+                    treeCategory = "IVR Raporları";
+
+                    if (path.includes('fatura-anamenu-tuslama')) {
+                        treeTitle = "Fatura Ana Menü IVR Tuşlama Kullanım";
+                    } else if (path.includes('postpaid-anamenu-agent')) {
+                        treeTitle = "Postpaid AnaMenü IVR Agent";
+                    } else if (path.includes('postpaid-anamenu-tuslama')) {
+                        treeTitle = "Postpaid Ana Menü IVR Tuşlama Kullanım";
+                    } else if (path.includes('postpaid-anamenu-sonlanma')) {
+                        treeTitle = "Postpaid Ana Menü IVR Sonlanma Kodu";
+                    } else if (path.includes('tarife-anamenu-tuslama')) {
+                        treeTitle = "Tarife Ana Menü IVR Tuşlama Kullanım";
+                    }
+                }
+
+                this.set('tree', {
+                    type: treeType,
+                    title: treeTitle,
+                    category: treeCategory
+                });
+
+
+                if (this.route.path === '/postpaid-cagri-raporlari-sonlanma' ||
+                    this.route.path === '/postpaid-cagri-raporlari-hangup' ||
+                    this.route.path === '/postpaid-ivr-raporlari-postpaid-anamenu-sonlanma' ||
+                    this.route.path === '/postpaid-ivr-raporlari-postpaid-anamenu-agent' ||
+                    this.route.path === '/postpaid-ivr-raporlari-postpaid-anamenu-tuslama' ||
+                    this.route.path === '/postpaid-ivr-raporlari-fatura-anamenu-tuslama' ||
+                    this.route.path === '/postpaid-ivr-raporlari-tarife-anamenu-tuslama'
                 ) {
                     this.set('selectedReportPageActive', true);
-                    this.set('ivrtype', reportsubpage);
+                    // this.set('ivrtype', reportsubpage);
 
-                    this._prepareDataForChart(reportsubpage);
+                    // this._prepareDataForChart(reportsubpage);
 
                 } else {
                     this.set('selectedReportPageActive', false);
@@ -315,19 +400,61 @@
 
             connectedCallback() {
                 super.connectedCallback();
+                
+                // Set the Turkish locale.
+                moment.locale('tr');
+
+                // Assign the i18n property with locale data from Moment.js.
+                this.shadowRoot.querySelector('vaadin-date-picker').i18n = {
+                    monthNames: moment.months(),
+                    weekdays: moment.weekdays(),
+                    weekdaysShort: moment.weekdaysShort(),
+                    firstDayOfWeek: moment.localeData().firstDayOfWeek(),
+                    formatDate: function (d) {
+                        return moment(d).format(moment.localeData().longDateFormat('L'));
+                    },
+                    parseDate: function (s) {
+                        return moment(s, moment.localeData().longDateFormat('L')).toDate();
+                    },
+                    formatTitle: function (monthName, fullYear) {
+                        return monthName + ' ' + fullYear;
+                    }
+                };
+
             }
 
+            _selectedDataChanged(event) {
+                if (event.detail != '') {
+                    this.set('datevalue', event.detail.value);
+                }
+            }
+
+            _getCurrentDay() {
+                // console.log(moment().format(moment.localeData().longDateFormat('L')));
+                return moment().format('YYYY-MM-DD');
+            }
 
             _datevalueChanged(newValue, oldVal) {
                 if (newValue !== '') {
-                    // console.log('datevalue', newValue);
+                    // console.log('_datevalueChanged', newValue);
 
-                    if (newValue === "2018-03-05") {
+                    var day = parseInt(newValue.split("-")[2]);
+
+                    if (day <= 12 && day >= 6) {
                         this.set('showIVR', true);
                     } else {
                         this.set('showIVR', false);
                     }
+
+                    // console.log(day);
+
+                    // if (newValue === "2018-05-05") {
+                    //     this.set('showIVR', true);
+                    // } else {
+                    //     this.set('showIVR', false);
+                    // }
                 }
+
 
             }
 

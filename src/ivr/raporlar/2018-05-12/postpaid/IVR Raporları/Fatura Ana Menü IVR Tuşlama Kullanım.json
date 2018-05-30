@@ -1,0 +1,52 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "0.MT Transfer", 
+            57.70936603182886, 
+            "color:green"
+        ], 
+        [
+            "1.Fatura Ödeme", 
+            11.974954343855988, 
+            "color:red"
+        ], 
+        [
+            "2.Tarife Detaylar", 
+            22.932428906861464, 
+            "color:yellow"
+        ], 
+        [
+            "3.Güncel Fatura", 
+            12.457605009131228, 
+            "color:blue"
+        ], 
+        [
+            "4.E-Fatura Servisleri", 
+            3.30028698147665, 
+            "color:lightgray"
+        ], 
+        [
+            "5.Numara Değişikliği", 
+            1.2261935820506131, 
+            "color:purple"
+        ], 
+        [
+            "6.Geçmiş Çağrılar", 
+            3.1176624054265587, 
+            "color:pink"
+        ]
+    ], 
+    "options": {
+        "title": "Fatura Ana Menü IVR Tuşlama Kullanım"
+    }, 
+    "title": "Fatura Ana Menü IVR Tuşlama Kullanım"
+}

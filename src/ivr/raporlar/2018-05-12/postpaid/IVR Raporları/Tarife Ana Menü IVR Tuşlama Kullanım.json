@@ -1,0 +1,42 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "0.MT Transfer", 
+            55.945945945945944, 
+            "color:green"
+        ], 
+        [
+            "1.Tarife İşlemleri", 
+            16.406406406406408, 
+            "color:red"
+        ], 
+        [
+            "2.Taahhüt İşlemleri", 
+            9.62962962962963, 
+            "color:yellow"
+        ], 
+        [
+            "3.Kalan Kullanım", 
+            20.34034034034034, 
+            "color:blue"
+        ], 
+        [
+            "4.Yurtdışı Servisler", 
+            1.6116116116116117, 
+            "color:lightgray"
+        ]
+    ], 
+    "options": {
+        "title": "Tarife Ana Menü IVR Tuşlama Kullanım"
+    }, 
+    "title": "Tarife Ana Menü IVR Tuşlama Kullanım"
+}

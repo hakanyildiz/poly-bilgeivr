@@ -1,0 +1,26 @@
+{
+    "type": "pie", 
+    "image": "", 
+    "data": [
+        [
+            "Report", 
+            "Process"
+        ], 
+        [
+            "Hangup", 
+            25.932173811878307
+        ], 
+        [
+            "Agent", 
+            71.62759583502995
+        ], 
+        [
+            "Disconnect", 
+            2.440230353091734
+        ]
+    ], 
+    "options": {
+        "title": "Postpaid Ana Menü IVR Sonlanma Kodu"
+    }, 
+    "title": "Postpaid Ana Menü IVR Sonlanma Kodu"
+}
