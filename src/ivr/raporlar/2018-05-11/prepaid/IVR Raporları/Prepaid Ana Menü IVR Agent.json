@@ -1,0 +1,57 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "0.MT Transfer", 
+            0.0, 
+            "color:green"
+        ], 
+        [
+            "1.KK ile Lira Yükleme", 
+            8.308298911002629, 
+            "color:red"
+        ], 
+        [
+            "2.Kalan Kullanım ve Yurtdışı Servisleri", 
+            20.05257228689448, 
+            "color:yellow"
+        ], 
+        [
+            "3.Kampanyalar", 
+            24.29590687194893, 
+            "color:blue"
+        ], 
+        [
+            "4.Yeni Paketler", 
+            20.97258730754788, 
+            "color:lightgray"
+        ], 
+        [
+            "5.OTA", 
+            18.240705970709726, 
+            "color:purple"
+        ], 
+        [
+            "6.Kayıp Çalıntı", 
+            18.503567405182125, 
+            "color:pink"
+        ], 
+        [
+            "7.Vergi Bildirimi", 
+            0.19714607585429966, 
+            "color:darkblue"
+        ]
+    ], 
+    "options": {
+        "title": "Prepaid AnaMenü IVR Agent"
+    }, 
+    "title": "Prepaid AnaMenü IVR Agent"
+}

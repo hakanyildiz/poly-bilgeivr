@@ -205,8 +205,18 @@
                         treeTitle = "Postpaid Ana Menü IVR Tuşlama Kullanım";
                     } else if (path.includes('postpaid-anamenu-sonlanma')) {
                         treeTitle = "Postpaid Ana Menü IVR Sonlanma Kodu";
+                    } else if (path.includes('prepaid-anamenu-agent')) {
+                        treeTitle = "Prepaid Ana Menü IVR Agent";
+                    } else if (path.includes('prepaid-anamenu-tuslama')) {
+                        treeTitle = "Prepaid Ana Menü IVR Tuşlama Kullanım";
+                    } else if (path.includes('prepaid-anamenu-sonlanma')) {
+                        treeTitle = "Prepaid Ana Menü IVR Sonlanma Kodu";
                     } else if (path.includes('tarife-anamenu-tuslama')) {
                         treeTitle = "Tarife Ana Menü IVR Tuşlama Kullanım";
+                    } else if (path.includes('kk-lira-yukleme-anamenu-tuslama')) {
+                        treeTitle = "KK ile Lira Yükleme Ana Menü IVR Tuşlama Kullanım";
+                    } else if (path.includes('kalankullanim-yurtdisiservisleri-tuslama')) {
+                        treeTitle = "Kalan Kullanım ve Yurtdışı Servisleri Ana Menü IVR Tuşlama Kullanım";
                     }
                 }
 
@@ -217,13 +227,19 @@
                 });
 
 
-                if (this.route.path === '/postpaid-cagri-raporlari-sonlanma' ||
-                    this.route.path === '/postpaid-cagri-raporlari-hangup' ||
-                    this.route.path === '/postpaid-ivr-raporlari-postpaid-anamenu-sonlanma' ||
-                    this.route.path === '/postpaid-ivr-raporlari-postpaid-anamenu-agent' ||
-                    this.route.path === '/postpaid-ivr-raporlari-postpaid-anamenu-tuslama' ||
-                    this.route.path === '/postpaid-ivr-raporlari-fatura-anamenu-tuslama' ||
-                    this.route.path === '/postpaid-ivr-raporlari-tarife-anamenu-tuslama'
+                if (this.route.path.includes('cagri-raporlari-sonlanma') ||
+                    this.route.path.includes('cagri-raporlari-hangup') ||
+                    this.route.path.includes('ivr-raporlari-postpaid-anamenu-sonlanma') ||
+                    this.route.path.includes('ivr-raporlari-postpaid-anamenu-agent') ||
+                    this.route.path.includes('ivr-raporlari-postpaid-anamenu-tuslama') ||
+                    this.route.path.includes('ivr-raporlari-prepaid-anamenu-sonlanma') ||
+                    this.route.path.includes('ivr-raporlari-prepaid-anamenu-agent') ||
+                    this.route.path.includes('ivr-raporlari-prepaid-anamenu-tuslama') ||
+                    this.route.path.includes('ivr-raporlari-fatura-anamenu-tuslama') ||
+                    this.route.path.includes('ivr-raporlari-tarife-anamenu-tuslama') || 
+                    this.route.path.includes('ivr-raporlari-kk-lira-yukleme-anamenu-tuslama') || 
+                    this.route.path.includes('ivr-raporlari-kalankullanim-yurtdisiservisleri-tuslama')
+                   
                 ) {
                     this.set('selectedReportPageActive', true);
                     // this.set('ivrtype', reportsubpage);

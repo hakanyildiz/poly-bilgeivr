@@ -1,0 +1,32 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "0.MT Transfer", 
+            0.0, 
+            "color:green"
+        ], 
+        [
+            "1.Kalan Kullanım", 
+            25.9763851044505, 
+            "color:red"
+        ], 
+        [
+            "2.Yurtdışı Servisleri", 
+            9.597335755373901, 
+            "color:yellow"
+        ]
+    ], 
+    "options": {
+        "title": "Kalan Kullanım ve Yurtdışı Servisleri Ana Menü IVR Tuşlama Kullanım"
+    }, 
+    "title": "Kalan Kullanım ve Yurtdışı Servisleri Ana Menü IVR Tuşlama Kullanım"
+}

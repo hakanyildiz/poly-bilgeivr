@@ -215,8 +215,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .analyzer-list,
       .reportitem,
-      .ivrreportitem,
-      .cagrireportitem,
+      .postpaidivrreportitem,
+      .postpaidcagrireportitem,
+      .prepaidcagrireportitem,
+      .prepaidivrreportitem,
       .drawercontentitem {
         max-height: 0;
         /* opacity: 0; */
@@ -231,20 +233,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin-left: 20px;
       }
 
-      .cagrireportitem {
+      .postpaidcagrireportitem,
+      .prepaidcagrireportitem {
         margin-left: 0;
       }
 
-      .ivrreportitem {
+      .postpaidivrreportitem,
+      .prepaidivrreportitem {
         margin: 10px 0px 10px 0px;
+        display: none !important;
       }
 
       .analyzer-list.active,
       .reportitem.active,
-      .ivrreportitem.active,
-      .cagrireportitem.active,
+      .postpaidivrreportitem.active,
+      .prepaidivrreportitem.active,
+      .postpaidcagrireportitem.active,
+      .prepaidcagrireportitem.active,
       .drawercontentitem.active {
         max-height: 35rem;
+        display: block !important;
       }
 
 
@@ -285,39 +293,71 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
             <blg-drawer-item name="report" icon="icons:receipt" title="Raporlar" on-tap="_onTapReportItem"></blg-drawer-item>
             <div class="reportitem">
-              <paper-item slot="item-icon" on-tap="_onTapCagriReportItem">Postpaid Çağrı Raporları</paper-item>
-              <a name="cagri-raporlari-sonlanma" href="[[rootPath]]report/postpaid-cagri-raporlari-sonlanma" class="cagrireportitem">
+              <paper-item slot="item-icon" on-tap="_onTapPostpaidCagriReportItem">Postpaid Çağrı Raporları</paper-item>
+              <a name="cagri-raporlari-sonlanma" href="[[rootPath]]report/postpaid-cagri-raporlari-sonlanma" class="postpaidcagrireportitem">
                 <paper-item slot="item-icon" role="menuitem">Sonlanma Kodu</paper-item>
               </a>
-              <a name="cagri-raporlari-hangup" href="[[rootPath]]report/postpaid-cagri-raporlari-hangup" class="cagrireportitem">
+              <a name="cagri-raporlari-hangup" href="[[rootPath]]report/postpaid-cagri-raporlari-hangup" class="postpaidcagrireportitem">
                 <paper-item slot="item-icon"> Hangup
                 </paper-item>
               </a>
             </div>
             <div class="reportitem">
-              <paper-item slot="item-icon" on-tap="_onTapIvrReportItem">Postpaid IVR Raporları</paper-item>
-              <a name="ivr-raporlari-postpaid-anamenu-sonlanma" href="[[rootPath]]report/postpaid-ivr-raporlari-postpaid-anamenu-sonlanma" class="ivrreportitem">
+              <paper-item slot="item-icon" on-tap="_onTapPostpaidIvrReportItem">Postpaid IVR Raporları</paper-item>
+              <a name="postpaid-ivr-raporlari-postpaid-anamenu-sonlanma" href="[[rootPath]]report/postpaid-ivr-raporlari-postpaid-anamenu-sonlanma" class="postpaidivrreportitem">
                 <paper-item slot="item-icon"> Postpaid Anamenü IVR Sonlanma Kodu
                 </paper-item>
               </a>
-              <a name="ivr-raporlari-postpaid-anamenu-agent" href="[[rootPath]]report/postpaid-ivr-raporlari-postpaid-anamenu-agent" class="ivrreportitem">
+              <a name="postpaid-ivr-raporlari-postpaid-anamenu-agent" href="[[rootPath]]report/postpaid-ivr-raporlari-postpaid-anamenu-agent" class="postpaidivrreportitem">
                 <paper-item slot="item-icon"> Postpaid Anamenü IVR Agent
                 </paper-item>
               </a>
-              <a name="ivr-raporlari-postpaid-anamenu-tuslama" href="[[rootPath]]report/postpaid-ivr-raporlari-postpaid-anamenu-tuslama" class="ivrreportitem">
+              <a name="postpaid-ivr-raporlari-postpaid-anamenu-tuslama" href="[[rootPath]]report/postpaid-ivr-raporlari-postpaid-anamenu-tuslama" class="postpaidivrreportitem">
                 <paper-item slot="item-icon"> Postpaid Anamenü IVR Tuşlama Kullanım
                 </paper-item>
               </a>
-              <a name="ivr-raporlari-fatura-anamenu-tuslama" href="[[rootPath]]report/postpaid-ivr-raporlari-fatura-anamenu-tuslama" class="ivrreportitem">
+              <a name="postpaid-ivr-raporlari-fatura-anamenu-tuslama" href="[[rootPath]]report/postpaid-ivr-raporlari-fatura-anamenu-tuslama" class="postpaidivrreportitem">
                 <paper-item slot="item-icon"> Fatura Anamenü IVR Tuşlama Kullanım
                 </paper-item>
               </a>
-              <a name="ivr-raporlari-tarife-anamenu-tuslama" href="[[rootPath]]report/postpaid-ivr-raporlari-tarife-anamenu-tuslama" class="ivrreportitem">
+              <a name="postpaid-ivr-raporlari-tarife-anamenu-tuslama" href="[[rootPath]]report/postpaid-ivr-raporlari-tarife-anamenu-tuslama" class="postpaidivrreportitem">
                 <paper-item slot="item-icon"> Tarife Anamenü IVR Tuşlama Kullanım
                 </paper-item>
               </a>
             </div>
-
+            <div class="reportitem">
+              <paper-item slot="item-icon" on-tap="_onTapPrepaidCagriReportItem">Prepaid Çağrı Raporları</paper-item>
+              <a name="cagri-raporlari-sonlanma" href="[[rootPath]]report/prepaid-cagri-raporlari-sonlanma" class="prepaidcagrireportitem">
+                <paper-item slot="item-icon" role="menuitem">Sonlanma Kodu</paper-item>
+              </a>
+              <a name="cagri-raporlari-hangup" href="[[rootPath]]report/prepaid-cagri-raporlari-hangup" class="prepaidcagrireportitem">
+                <paper-item slot="item-icon"> Hangup
+                </paper-item>
+              </a>
+            </div>
+            <div class="reportitem">
+              <paper-item slot="item-icon" on-tap="_onTapPrepaidIvrReportItem">Prepaid IVR Raporları</paper-item>
+              <a name="prepaid-ivr-raporlari-prepaid-anamenu-sonlanma" href="[[rootPath]]report/prepaid-ivr-raporlari-prepaid-anamenu-sonlanma" class="prepaidivrreportitem">
+                <paper-item slot="item-icon"> Prepaid Anamenü IVR Sonlanma Kodu
+                </paper-item>
+              </a>
+              <a name="prepaid-ivr-raporlari-prepaid-anamenu-agent" href="[[rootPath]]report/prepaid-ivr-raporlari-prepaid-anamenu-agent" class="prepaidivrreportitem">
+                <paper-item slot="item-icon"> Prepaid Anamenü IVR Agent
+                </paper-item>
+              </a>
+              <a name="prepaid-ivr-raporlari-prepaid-anamenu-tuslama" href="[[rootPath]]report/prepaid-ivr-raporlari-prepaid-anamenu-tuslama" class="prepaidivrreportitem">
+                <paper-item slot="item-icon"> Prepaid Anamenü IVR Tuşlama Kullanım
+                </paper-item>
+              </a>
+              <a name="prepaid-ivr-raporlari-kk-lira-yukleme-anamenu-tuslama" href="[[rootPath]]report/prepaid-ivr-raporlari-kk-lira-yukleme-anamenu-tuslama" class="prepaidivrreportitem">
+                <paper-item slot="item-icon"> KK ile Lira Yükleme Ana Menü IVR Tuşlama Kullanım
+                </paper-item>
+              </a>
+              <a name="prepaid-ivr-raporlari-kalankullanim-yurtdisiservisleri-tuslama" href="[[rootPath]]report/prepaid-ivr-raporlari-kalankullanim-yurtdisiservisleri-tuslama" class="prepaidivrreportitem">
+                <paper-item slot="item-icon"> Kalan Kullanım ve Yurtdışı Servisleri Ana Menü IVR Tuşlama Kullanım
+                </paper-item>
+              </a>
+            </div>
           </iron-selector>
         </section>
 
@@ -432,7 +472,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _setOnFocusDrawerItem(itemList, targetKey) {
-        // this._setOnFocusDrawerItem(this.shadowRoot.querySelectorAll('.ivrreportitem'), this.route.path.split(
+        // this._setOnFocusDrawerItem(this.shadowRoot.querySelectorAll('.postpaidivrreportitem'), this.route.path.split(
         //       '/')[2]);
         // itemList.forEach(element => {
 
@@ -456,15 +496,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._checkActiveClass(list, "active");
       }
 
-      _onTapCagriReportItem() {
-        var list = this.shadowRoot.querySelectorAll('.cagrireportitem');
+      _onTapPostpaidCagriReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.postpaidcagrireportitem');
         list.forEach(element => {
           this._checkActiveClass(element, "active");
         });
       }
 
-      _onTapIvrReportItem() {
-        var list = this.shadowRoot.querySelectorAll('.ivrreportitem');
+      _onTapPostpaidIvrReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.postpaidivrreportitem');
+        list.forEach(element => {
+          this._checkActiveClass(element, "active");
+        });
+      }
+
+      _onTapPrepaidCagriReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.prepaidcagrireportitem');
+        list.forEach(element => {
+          this._checkActiveClass(element, "active");
+        });
+      }
+
+      _onTapPrepaidIvrReportItem() {
+        var list = this.shadowRoot.querySelectorAll('.prepaidivrreportitem');
         list.forEach(element => {
           this._checkActiveClass(element, "active");
         });

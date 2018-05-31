@@ -1,0 +1,37 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "Prepaid Ana Menü", 
+            34.15771335901074, 
+            "color:green"
+        ], 
+        [
+            "KYT Proaktivite", 
+            3.3380633826609905, 
+            "color:red"
+        ], 
+        [
+            "TL Bakiye Proaktivite", 
+            48.1383877289006, 
+            "color:yellow"
+        ], 
+        [
+            "Köpük Çağrı", 
+            14.365835529427665, 
+            "color:blue"
+        ]
+    ], 
+    "options": {
+        "title": "Hangup"
+    }, 
+    "title": "Hangup"
+}

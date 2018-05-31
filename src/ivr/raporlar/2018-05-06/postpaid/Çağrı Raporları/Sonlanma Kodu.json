@@ -1,22 +1,28 @@
 {
-    "type": "pie", 
+    "type": "column", 
     "image": "", 
     "data": [
         [
-            "Report", 
-            "Process"
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
         ], 
         [
             "Hangup", 
-            37.665394918418706
+            37.665394918418706, 
+            "color:green"
         ], 
         [
             "Agent", 
-            59.2052926373894
+            59.2052926373894, 
+            "color:red"
         ], 
         [
             "Disconnect", 
-            3.1293124441918985
+            3.1293124441918985, 
+            "color:yellow"
         ]
     ], 
     "options": {

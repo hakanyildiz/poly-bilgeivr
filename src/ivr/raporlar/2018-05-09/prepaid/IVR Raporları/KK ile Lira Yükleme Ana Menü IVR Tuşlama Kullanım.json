@@ -1,0 +1,37 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "0.MT Transfer", 
+            0.0, 
+            "color:green"
+        ], 
+        [
+            "1.KK ile Lira Yükleme", 
+            17.532467532467532, 
+            "color:red"
+        ], 
+        [
+            "2.Tarife İşlemleri", 
+            16.81096681096681, 
+            "color:yellow"
+        ], 
+        [
+            "3.Numara Değişikliği", 
+            7.215007215007215, 
+            "color:blue"
+        ]
+    ], 
+    "options": {
+        "title": "KK ile Lira Yükleme Ana Menü IVR Tuşlama Kullanım"
+    }, 
+    "title": "KK ile Lira Yükleme Ana Menü IVR Tuşlama Kullanım"
+}

@@ -1,0 +1,32 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "Hangup", 
+            49.02727925340991, 
+            "color:green"
+        ], 
+        [
+            "Agent", 
+            46.464465183058145, 
+            "color:red"
+        ], 
+        [
+            "Disconnect", 
+            4.508255563531946, 
+            "color:yellow"
+        ]
+    ], 
+    "options": {
+        "title": "Sonlanma Kodu"
+    }, 
+    "title": "Sonlanma Kodu"
+}

@@ -1,0 +1,32 @@
+{
+    "type": "column", 
+    "image": "", 
+    "data": [
+        [
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
+        ], 
+        [
+            "Hangup", 
+            30.322924059616753, 
+            "color:green"
+        ], 
+        [
+            "Agent", 
+            64.5434114028862, 
+            "color:red"
+        ], 
+        [
+            "Disconnect", 
+            5.133664537497043, 
+            "color:yellow"
+        ]
+    ], 
+    "options": {
+        "title": "Prepaid Ana Menü IVR Sonlanma Kodu"
+    }, 
+    "title": "Prepaid Ana Menü IVR Sonlanma Kodu"
+}

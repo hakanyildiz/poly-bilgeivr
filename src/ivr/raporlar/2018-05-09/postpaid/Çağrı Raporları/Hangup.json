@@ -1,30 +1,38 @@
 {
-    "type": "pie", 
+    "type": "column", 
     "image": "", 
     "data": [
         [
-            "Report", 
-            "Process"
+            "DTMF", 
+            "Process", 
+            {
+                "role": "style"
+            }
         ], 
         [
             "Postpaid Ana Menü", 
-            47.788615713522184
+            47.788615713522184, 
+            "color:green"
         ], 
         [
             "KYT Proaktivite", 
-            2.7692
+            2.769241, 
+            "color:red"
         ], 
         [
             "Fatura Proaktivite", 
-            4.0787
+            4.078701, 
+            "color:yellow"
         ], 
         [
             "Fatura Kesim Proaktivite", 
-            26.0689
+            26.068947, 
+            "color:blue"
         ], 
         [
             "Köpük Çağrı", 
-            45.963
+            45.363442, 
+            "color:lightgray"
         ]
     ], 
     "options": {
