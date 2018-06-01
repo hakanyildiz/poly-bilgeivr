@@ -460,12 +460,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         } else if (page === 'report') {
           this._onTapReportItem();
-          if (this.route.path.includes('cagri-raporlari')) {
-            this._onTapCagriReportItem();
-
-          } else {
-            this._onTapIvrReportItem();
-
+          if (this.route.path.includes('postpaid-cagri-raporlari')) {
+            this._onTapPostpaidCagriReportItem();
+          }
+          else if(this.route.path.includes('prepaid-cagri-raporlari')) {
+            this._onTapPrepaidCagriReportItem();
+          }
+          else if(this.route.path.includes('postpaid-ivr-raporlari')) {
+            this._onTapPostpaidIvrReportItem();
+          }
+          else if(this.route.path.includes('prepaid-ivr-raporlari')) {
+            this._onTapPrepaidIvrReportItem();
           }
 
         }

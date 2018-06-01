@@ -16,12 +16,12 @@
         ], 
         [
             "KYT Proaktivite", 
-            3.587224, 
+            3.58, 
             "color:red"
         ], 
         [
             "Fatura Proaktivite", 
-            1.015561, 
+            1.015, 
             "color:yellow"
         ], 
         [
@@ -31,7 +31,7 @@
         ], 
         [
             "Köpük Çağrı", 
-            46.535627, 
+            46.535, 
             "color:lightgray"
         ]
     ], 

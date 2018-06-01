@@ -73,11 +73,87 @@
                 height: 400px;
                 width: 50em;
             }
+
+            #alertDialog {
+                /* display: none; */
+                opacity: 0;
+                transition: .5s ease;
+                -webkit-transform:scale(0);
+                width: 100px;
+                background: red;
+                color: #fff;
+                position: absolute;
+                top: 21%;
+                left: 48%;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0;
+                padding: 10px 15px 15px 15px;
+                font-family: cursive;
+                border: 1px solid;
+                border-top-left-radius: 50%;
+                border-bottom-right-radius: 50%;
+                text-align: center;
+                font-style: unset;
+                /* box-shadow: 1px 0.3px 2px 0.3px #fff; */
+                margin-top: 0;
+            }
+            #alertDialog:hover{
+                @apply --shadow-elevation-8dp;
+            }
+
+            #alertDialog.active {
+                transform: scale(1);
+                opacity: 1;
+                display: block;
+                @apply --shadow-elevation-4dp;
+            }
+
+            @media only screen and (max-width: 1025px) {
+                #alertDialog {
+                    display: none !important;
+                }
+            }
+            
+            @media only screen and (min-width: 1366px) {
+                #alertDialog {
+                    top: 24%;
+                    left: 61%;
+                }
+            }
+
+            @media only screen and (min-width: 1444px) {
+                #alertDialog {
+                    top: 23%;
+                    left: 57%;
+                }
+            }
+
+            @media only screen and (min-width: 1622px) {
+                #alertDialog {
+                    top: 21%;
+                    left: 48%;
+                }
+            }
+
+            @media only screen and (min-width: 1920px) {
+                #alertDialog {
+                    top: 19%;
+                    left: 40%;
+                }
+            }
+
         </style>
 
         <div id="error" class="horizontal-flex"></div>
         <div hidden$={{!isData}}>
             <google-chart type=[[chartData.type]] options=[[chartData.options]] data=[[chartData.data]]></google-chart>
+        </div>
+
+        <div id="alertDialog">
+            <span>[[alertname]] Çok Yüksek</span>
         </div>
 
         <div class="loading-panel" hidden$={{!loading}}>
@@ -104,6 +180,9 @@
 
             static get properties() {
                 return {
+                    alertname: {
+                        type: String
+                    },
                     tree: {
                         type: Object,
                         observer: '_treeChanged'
@@ -151,6 +230,8 @@
             }
             _clearTree() {
                 this.$.error.innerHTML = "";
+
+                this.$.alertDialog.classList.remove('active');
                 // this.set('chartData', {} );
             }
 
@@ -166,6 +247,18 @@
                         this.set('isData', true);
                         // console.log(myJson);
                         this.set('chartData', myJson);
+
+                        var datas = myJson.data;
+                        datas.forEach(data => {
+                            if (data[0] == 'Köpük Çağrı') {
+                                let kopukValue = data[1];
+                                if (kopukValue > 30) {
+                                    this.set('alertname', data[0]);
+                                    this.$.alertDialog.classList.add('active');
+                                }
+                            }
+
+                        });
 
                         // var tree = [myJson];
                         // var res = that.recursive_tree(tree, 'div', 'ul', 0);

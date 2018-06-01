@@ -16,22 +16,22 @@
         ], 
         [
             "KYT Proaktivite", 
-            2.769241, 
+            2.76, 
             "color:red"
         ], 
         [
             "Fatura Proaktivite", 
-            4.078701, 
+            4.0219, 
             "color:yellow"
         ], 
         [
             "Fatura Kesim Proaktivite", 
-            26.068947, 
+            26.06, 
             "color:blue"
         ], 
         [
             "Köpük Çağrı", 
-            45.363442, 
+            20.700, 
             "color:lightgray"
         ]
     ], 
