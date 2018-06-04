@@ -1,17 +1,17 @@
 # poly-bilgeivr
-IVR Monitoring Client Side App - Polymer3
+IVR Monitoring Client Side App - Polymer2
 
 ## Setup Requirements
 
 	-> Firstly, install npm & http-server  
 	
-	npm install -g npm 
+	npm install -g bower
 	
 	npm install -g http-server
 		
 	-> Secondly, get dependencies 
 	
-	npm install
+	bower install
 
 ## Run 
 
